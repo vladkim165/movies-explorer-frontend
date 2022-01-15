@@ -1,0 +1,79 @@
+@import "../../utils/css/variables.scss";
+
+.info {
+  &__title-container {
+    border-bottom: 1px solid $light-gray;
+  }
+  &__title {
+    @include font-size(22px, 1.22);
+    font-weight: 400;
+    margin: 0 0 24px 0;
+  }
+  &__subtitle {
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 1.2;
+    margin: 0;
+  }
+  &__text {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.43;
+    margin: 0;
+  }
+}
+.bar {
+  display: flex;
+  &__section {
+    height: 36px;
+    align-items: center;
+    &_first {
+      background-color: $green;
+      color: $black;
+      display: flex;
+      justify-content: center;
+    }
+    &_second {
+      background-color: $secondary-light;
+      display: flex;
+      justify-content: center;
+    }
+  }
+  &__sub-text {
+    font-size: 14px;
+    line-height: 1.21;
+    display: flex;
+    justify-content: center;
+    color: $gray;
+    margin: 14px 0 0 0;
+  }
+  &__item-container {
+    &_first {
+      width: 20%;
+    }
+    &_second {
+      width: 80%;
+    }
+  }
+}
+
+.about-project {
+  padding: 110px 70px;
+  &__info {
+    display: flex;
+    padding-top: 70px;
+  }
+  &__info-item {
+    width: 50%;
+    margin-right: 40px;
+    &:last-of-type {
+      margin: 0;
+    }
+  }
+  &__subtitle {
+    margin-bottom: 26px;
+  }
+  &__text {
+    margin-bottom: 110px;
+  }
+}

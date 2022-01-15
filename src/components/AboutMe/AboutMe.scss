@@ -1,0 +1,45 @@
+@import "../../utils/css/variables.scss";
+
+.about-me {
+  padding: 110px 70px;
+  &__title {
+    text-align: left;
+  }
+  &__content {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 66px;
+  }
+  &__description {
+    width: 53%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  &__list {
+    display: flex;
+    justify-content: flex-start;
+  }
+  &__item {
+    margin-right: 20px;
+    font-weight: 400;
+    &:last-of-type {
+      margin: 0;
+    }
+  }
+  &__text {
+    line-height: 22px;
+  }
+  &__avatar {
+    width: 270px;
+    height: 327px;
+    object-fit: cover;
+    border-radius: 13px;
+  }
+}
+
+.nav {
+  &__link {
+    cursor: pointer;
+  }
+}

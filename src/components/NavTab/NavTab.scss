@@ -1,0 +1,49 @@
+@import "../../utils/css/variables.scss";
+
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &__list {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+  }
+  &__item {
+    margin-right: 10px;
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+  &__button {
+    @include font-size(12px, 1.33);
+    border: none;
+    color: $white;
+    font-weight: 500;
+    border-radius: 10px;
+    width: 96px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $secondary-light;
+    cursor: pointer;
+    text-decoration: none;
+    color: $white;
+    transition: all 0.3s ease;
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+  &__link {
+    text-decoration: none;
+    color: $white;
+    transition: all 0.3s ease;
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+}
