@@ -1,0 +1,33 @@
+@import "../../utils/css/variables.scss";
+
+.footer {
+  padding: 9px 70px 20px 70px;
+  @include font-size(13px, 1.23);
+  &__description-container {
+    padding-bottom: 20px;
+    border-bottom: 1px solid $dark-gray;
+  }
+  &__description {
+    color: $gray;
+    text-align: center;
+    margin: 0;
+  }
+  &__refs {
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+  &__copyright {
+    margin: 0;
+  }
+  &__links {
+  }
+  &__link {
+    margin-right: 20px;
+    text-decoration: none;
+    color: $white;
+    &:last-of-type {
+      margin: 0;
+    }
+  }
+}

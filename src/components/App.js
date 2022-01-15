@@ -4,7 +4,7 @@ import "./App.scss";
 import Header from "./Header/Header";
 import Main from "./Main/Main";
 
-function App() {
+const App = () => {
   return (
     <div className="page">
       <Header signup={"/signup"} signin={"/signin"} />
@@ -13,6 +13,6 @@ function App() {
       </Routes>
     </div>
   );
-}
+};
 
 export default App;
