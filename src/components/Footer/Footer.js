@@ -11,7 +11,7 @@ const Footer = () => {
       </div>
       <div className="footer__refs">
         <p className="footer__copyright">&copy; 2021</p>
-        <div className="footer__links">
+        <div>
           <a className="footer__link" href="_blank">
             Яндекс.Практикум
           </a>

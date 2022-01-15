@@ -36,4 +36,27 @@
     width: 76px;
     height: 32px;
   }
+  &__links-container {
+    display: flex;
+    align-items: center;
+  }
+  &__link {
+    @include font-size(14px, 1.29);
+    text-decoration: none;
+    color: $white;
+    margin-right: 20px;
+    &:last-of-type {
+      margin-right: 0;
+    }
+  }
+  &__account-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: $secondary-extra-light;
+    border-radius: 20px;
+    width: 100px;
+    height: 32px;
+    margin-left: 50px;
+  }
 }
