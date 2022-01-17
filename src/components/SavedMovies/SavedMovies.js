@@ -1,11 +1,11 @@
 import React from "react";
-import "./Movies.scss";
+import "./SavedMovies.scss";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
 import PropTypes from "prop-types";
 
-const Movies = ({ setIsShortMovie, isShortMovie, cards }) => {
+const SavedMovies = ({ setIsShortMovie, isShortMovie, savedCards }) => {
   return (
     <>
       <div className="movies">
@@ -13,16 +13,16 @@ const Movies = ({ setIsShortMovie, isShortMovie, cards }) => {
           setIsShortMovie={setIsShortMovie}
           isShortMovie={isShortMovie}
         />
-        {cards ? <MoviesCardList cards={cards} /> : <Preloader />}
+        {savedCards ? <MoviesCardList cards={savedCards} /> : <Preloader />}
       </div>
     </>
   );
 };
 
-Movies.propTypes = {
+SavedMovies.propTypes = {
   setIsShortMovie: PropTypes.func,
   isShortMovie: PropTypes.bool,
-  cards: PropTypes.array,
+  savedCards: PropTypes.array,
 };
 
-export default Movies;
+export default SavedMovies;

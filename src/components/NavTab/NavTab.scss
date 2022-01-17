@@ -37,6 +37,10 @@
     &:hover {
       opacity: 0.5;
     }
+    &:active {
+      opacity: 1;
+      transform: translateY(2px);
+    }
   }
   &__link {
     text-decoration: none;

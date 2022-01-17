@@ -31,5 +31,10 @@
     &:hover {
       opacity: 0.5;
     }
+    &:active {
+      display: inline-block;
+      opacity: 1;
+      transform: translateY(2px);
+    }
   }
 }

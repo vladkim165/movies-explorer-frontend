@@ -65,8 +65,8 @@
     right: 0;
     bottom: 0;
     background-color: $dark-gray;
-    -webkit-transition: 0.4s;
-    transition: 0.4s;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
     border-radius: 34px;
     &:before {
       position: absolute;
@@ -76,8 +76,8 @@
       left: 2px;
       bottom: 2px;
       background-color: $white;
-      -webkit-transition: 0.4s;
-      transition: 0.4s;
+      -webkit-transition: 0.3s;
+      transition: 0.3s;
       border-radius: 50%;
       border: 1px solid $white;
     }

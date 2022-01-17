@@ -1,0 +1,66 @@
+@import "../../utils/css/variables.scss";
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 180px);
+  padding-top: 74px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &__title {
+    @include font-size(24px, 1.2);
+    font-weight: 500;
+    margin-bottom: 123px;
+  }
+  &__input-container {
+    padding: 16px 0;
+    border-bottom: 1px solid $dark-gray;
+    width: 410px;
+    display: flex;
+    justify-content: space-between;
+    &:last-of-type {
+      margin-bottom: 220px;
+    }
+  }
+  &__input {
+    background: none;
+    border: none;
+    color: $white;
+    width: 350px;
+    &:focus {
+      outline: none;
+    }
+    &::placeholder {
+      text-align: right;
+      color: $white;
+    }
+  }
+  &__input-text {
+    @include font-size(11px, 1.18);
+  }
+  &__button {
+    width: 410px;
+    height: 16px;
+    background: none;
+    border: none;
+    color: $white;
+    @include font-size(13px, 1.23);
+    margin-bottom: 16px;
+    transition: all 0.3s ease;
+    &:hover {
+      opacity: 0.5;
+      cursor: pointer;
+    }
+    &:active {
+      opacity: 1;
+      transform: translateY(2px);
+    }
+  }
+  &__logout-button {
+    color: $red;
+  }
+}

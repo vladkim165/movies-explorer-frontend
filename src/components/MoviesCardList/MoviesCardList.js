@@ -1,68 +1,9 @@
 import React from "react";
 import "./MoviesCardList.scss";
-import imagePath from "../../images/card.jpg";
 import MoviesCard from "../MoviesCard/MoviesCard";
+import PropTypes from "prop-types";
 
-const MoviesCardList = () => {
-  const data = [
-    {
-      title: "Киноальманах «100 лет дизайна»",
-      duration: "1ч 42м",
-      image: imagePath,
-      id: 1,
-      isLiked: true,
-    },
-    {
-      title: "Киноальманах «100 лет дизайна»",
-      duration: "1ч 42м",
-      image: imagePath,
-      id: 2,
-      isLiked: true,
-    },
-    {
-      title: "Киноальманах «100 лет дизайна»",
-      duration: "1ч 42м",
-      image: imagePath,
-      id: 3,
-      isLiked: true,
-    },
-    {
-      title: "Киноальманах «100 лет дизайна»",
-      duration: "1ч 42м",
-      image: imagePath,
-      id: 4,
-      isLiked: true,
-    },
-    {
-      title: "Киноальманах «100 лет дизайна»",
-      duration: "1ч 42м",
-      image: imagePath,
-      id: 5,
-      isLiked: true,
-    },
-    {
-      title: "Киноальманах «100 лет дизайна»",
-      duration: "1ч 42м",
-      image: imagePath,
-      id: 6,
-      isLiked: false,
-    },
-    {
-      title: "Киноальманах «100 лет дизайна»",
-      duration: "1ч 42м",
-      image: imagePath,
-      id: 7,
-      isLiked: false,
-    },
-    {
-      title: "Киноальманах «100 лет дизайна»",
-      duration: "1ч 42м",
-      image: imagePath,
-      id: 8,
-      isLiked: false,
-    },
-  ];
-
+const MoviesCardList = ({ cards }) => {
   const [displayedCards, setDisplayedCards] = React.useState(7);
 
   const handleChangeDisplayedCards = () => {
@@ -72,7 +13,7 @@ const MoviesCardList = () => {
   return (
     <section className="movies-card-list">
       <ul className="movies-card-list__list">
-        {data.slice(0, displayedCards).map((card) => {
+        {cards.slice(0, displayedCards).map((card) => {
           return (
             <MoviesCard
               key={card.id}
@@ -92,6 +33,10 @@ const MoviesCardList = () => {
       </button>
     </section>
   );
+};
+
+MoviesCardList.propTypes = {
+  cards: PropTypes.array,
 };
 
 export default MoviesCardList;

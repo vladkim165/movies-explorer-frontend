@@ -26,6 +26,10 @@
     &:last-of-type {
       margin: 0;
     }
+    &:active {
+      opacity: 1;
+      transform: translateY(2px);
+    }
   }
   &__text {
     line-height: 22px;
