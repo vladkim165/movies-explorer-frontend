@@ -1,3 +1,8 @@
+## Сгенерированный макет: https://www.figma.com/file/5KawWVjacZX9y1cQC1wxrP/Diploma?node-id=891%3A3857  
+## Публичный IP: 51.250.1.100  
+## Домен фронтенда: https://movies-explorer-prod.nomoredomains.rocks/  
+## Поддомен бекенда: https://api.movies-explorer-prod.nomoredomains.rocks/ 
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
