@@ -7,17 +7,17 @@ const NavTab = () => {
     <nav className="nav">
       <ul className="nav__list">
         <li className="nav__item">
-          <a className="nav__button nav__button_big" href="_blank">
+          <a className="nav__button" href="_blank">
             О проекте
           </a>
         </li>
         <li className="nav__item">
-          <a className="nav__button nav__button_big" href="_blank">
+          <a className="nav__button" href="_blank">
             Технологии
           </a>
         </li>
         <li className="nav__item">
-          <a className="nav__button nav__button_big" href="_blank">
+          <a className="nav__button" href="_blank">
             Студент
           </a>
         </li>

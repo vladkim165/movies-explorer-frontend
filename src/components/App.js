@@ -10,6 +10,7 @@ import Profile from "./Profile/Profile";
 import Login from "./Login/Login";
 import Register from "./Register/Register";
 import NotFoundPage from "./NotFoundPage/NotFoundPage";
+import Menu from "./Menu/Menu";
 import imagePath from "../images/card.jpg";
 
 const movies = [
@@ -103,18 +104,15 @@ const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isShortMovie, setIsShortMovie] = useState(true);
   const [isNotFoundPage, setIsNotFoundPage] = useState(false);
-
-  const handleNotFoundPage = (bool) => {
-    setIsNotFoundPage(bool);
-  };
-  const handleShortMovie = () => {
-    setIsShortMovie((bool) => !bool);
-  };
+  const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
 
   useEffect(() => {
-    setIsNotFoundPage(false);
     setIsLoggedIn(true);
   }, []);
+
+  useEffect(() => {
+    console.log(isNotFoundPage);
+  }, [isNotFoundPage]);
 
   return (
     <div className="page">
@@ -126,13 +124,19 @@ const App = () => {
         profilePath={profilePath}
         isLoggedIn={isLoggedIn}
         isNotFoundPage={isNotFoundPage}
+        onSideMenu={setIsSideMenuOpen}
+      />
+      <Menu
+        isSideMenuOpen={isSideMenuOpen}
+        profilePath={profilePath}
+        onSideMenu={setIsSideMenuOpen}
       />
       <Routes>
         <Route
           path="/movies"
           element={
             <Movies
-              onShortMovie={handleShortMovie}
+              onShortMovie={setIsShortMovie}
               isShortMovie={isShortMovie}
               movies={movies}
             />
@@ -142,22 +146,22 @@ const App = () => {
           path="/saved-movies"
           element={
             <SavedMovies
-              onShortMovie={handleShortMovie}
+              onShortMovie={setIsShortMovie}
               isShortMovie={isShortMovie}
               savedMovies={savedMovies}
             />
           }
         />
         <Route path="/profile" element={<Profile />} />
-        <Route path={signinPath} element={<Login signinPath={signinPath} />} />
+        <Route path={signinPath} element={<Login signupPath={signupPath} />} />
         <Route
           path={signupPath}
-          element={<Register signupPath={signupPath} />}
+          element={<Register signinPath={signinPath} />}
         />
         <Route exact path="/" element={<Main />} />
         <Route
           path="*"
-          element={<NotFoundPage onNotFoundPage={handleNotFoundPage} />}
+          element={<NotFoundPage onNotFoundPage={setIsNotFoundPage} />}
         />
       </Routes>
       <Footer

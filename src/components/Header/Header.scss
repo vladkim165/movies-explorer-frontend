@@ -3,6 +3,7 @@
 .header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 21px 70px;
   &__logo {
     width: 38px;
@@ -70,5 +71,37 @@
     width: 100px;
     height: 32px;
     margin-left: 50px;
+  }
+  &__menu-button {
+    width: 44px;
+    height: 44px;
+    background-color: transparent;
+    border: none;
+    background: url(../../images/menu-button.svg);
+    display: none;
+    padding: 0;
+  }
+}
+@media screen and (max-width: 768px) {
+  .header {
+    padding: 20px 30px;
+    &__links-container {
+      align-items: flex-end;
+    }
+    &__link {
+      display: none;
+    }
+    &__menu-button {
+      display: flex;
+    }
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .header {
+    padding: 18px 14px;
+    &__links-container {
+      align-items: flex-end;
+    }
   }
 }

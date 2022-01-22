@@ -13,27 +13,41 @@ const Header = ({
   profilePath,
   isLoggedIn,
   isNotFoundPage,
+  onSideMenu,
 }) => {
   const { pathname } = useLocation();
-  if (pathname === signinPath || pathname === signupPath || isNotFoundPage)
+  if (pathname === signinPath || pathname === signupPath || isNotFoundPage) {
     return null;
+  }
+
   return (
     <header className="header">
       <img className="header__logo" src={logoPath} alt="Логотип" />
       {isLoggedIn && (
         <div className="header__links-container">
-          <Link className="header__link" to={allMoviesPath}>
+          <Link className="header__link" to={allMoviesPath} alt="Фильмы">
             Фильмы
           </Link>
-          <Link className="header__link" to={savedMoviesPath}>
+          <Link
+            className="header__link"
+            to={savedMoviesPath}
+            alt="Сохранённые фильмы"
+          >
             Сохранённые фильмы
           </Link>
           <Link
             className="header__link header__account-button"
             to={profilePath}
+            alt="Аккаунт"
           >
             Аккаунт
           </Link>
+          <button
+            className="header__menu-button"
+            alt="Меню"
+            type="button"
+            onClick={() => onSideMenu(true)}
+          ></button>
         </div>
       )}
       {!isLoggedIn && (
@@ -41,12 +55,14 @@ const Header = ({
           <Link
             to={signupPath}
             className="header__button header__signup-button"
+            alt="Регистрация"
           >
             Регистрация
           </Link>
           <Link
             to={signinPath}
             className="header__button header__signin-button"
+            alt="Войти"
           >
             Войти
           </Link>
@@ -64,6 +80,7 @@ Header.propTypes = {
   savedMoviesPath: PropTypes.string.isRequired,
   profilePath: PropTypes.string.isRequired,
   isNotFoundPage: PropTypes.bool,
+  onSideMenu: PropTypes.func,
 };
 
 export default memo(Header);

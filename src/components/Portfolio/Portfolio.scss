@@ -37,3 +37,43 @@
     height: 60px;
   }
 }
+
+@media screen and (max-width: 768px) {
+  .portfolio {
+    padding: 0 50px 90px 50px;
+    &__subtitle {
+      @include font-size(18px, 1.11);
+    }
+    &__link {
+      @include font-size(28px, 1.78);
+    }
+    &__item {
+      border-color: $light-gray;
+    }
+  }
+  .nav {
+    &__link-image {
+      width: 27px;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .portfolio {
+    &__link {
+      @include font-size(18px, 1.5);
+    }
+  }
+  .nav {
+    &__link-image {
+      width: 18px;
+      height: 28px;
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .portfolio {
+    padding: 0 14px 90px 14px;
+  }
+}

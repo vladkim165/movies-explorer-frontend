@@ -6,7 +6,7 @@ import logoPath from "../../images/logo.svg";
 import validate from "../../utils/js/validate";
 import useForm from "../../hooks/useForm";
 
-const Login = ({ signinPath }) => {
+const Login = ({ signupPath }) => {
   const handleLogin = () => {
     console.log("Login logic");
   };
@@ -61,7 +61,7 @@ const Login = ({ signinPath }) => {
           ) : null}
         </div>
         <button
-          className="form__button form__submit-button"
+          className="form__button form__submit-button form__signin-button"
           id="signin-button"
           type="submit"
         >
@@ -71,7 +71,7 @@ const Login = ({ signinPath }) => {
           <span className="form__redirect-text sign__text">
             Ещё не зарегистрированы?
           </span>
-          <Link className="form__redirect-link sign__text" to={signinPath}>
+          <Link className="form__redirect-link sign__text" to={signupPath}>
             Регистрация
           </Link>
         </div>
@@ -81,7 +81,7 @@ const Login = ({ signinPath }) => {
 };
 
 Login.propTypes = {
-  signinPath: PropTypes.string.isRequired,
+  signupPath: PropTypes.string.isRequired,
 };
 
 export default memo(Login);

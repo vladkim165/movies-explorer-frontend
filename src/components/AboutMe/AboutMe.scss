@@ -23,8 +23,9 @@
   &__item {
     margin-right: 20px;
     font-weight: 400;
+    margin-top: 87px;
     &:last-of-type {
-      margin: 0;
+      margin-right: 0;
     }
     &:active {
       opacity: 1;
@@ -45,5 +46,104 @@
 .nav {
   &__link {
     cursor: pointer;
+  }
+}
+
+@media screen and (max-width: 1350px) {
+  .about-me {
+    &__title {
+      margin-bottom: 16px;
+    }
+    &__subtitle {
+      margin-bottom: 20px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .about-me {
+    padding: 90px 50px;
+    &__avatar {
+      width: 255px;
+      height: 307px;
+    }
+    &__item {
+      margin-top: 50px;
+    }
+    &__item:nth-of-type(n + 3) {
+      display: none;
+    }
+  }
+  .info {
+    &__title {
+      &_ {
+        line-height: 1;
+      }
+    }
+    &__text {
+      @include font-size(12px, 1.5);
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .about-me {
+    &__title {
+      text-align: center;
+      margin-top: 35px;
+    }
+    &__content {
+      flex-direction: column-reverse;
+      align-items: center;
+      text-align: center;
+    }
+    &__description {
+      width: 100%;
+    }
+    &__list {
+      justify-content: center;
+    }
+    &__subtitle {
+      @include font-size(12px, 1.5);
+    }
+    &__item {
+      margin-right: 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .about-me {
+    padding: 70px 14px;
+    &__avatar {
+      width: 292px;
+      height: 352px;
+    }
+    &__description {
+      text-align: left;
+    }
+    &__content {
+      text-align: left;
+    }
+    &__title {
+      text-align: left;
+    }
+    &__list {
+      justify-content: flex-start;
+    }
+  }
+  .info {
+    &__title {
+      @include font-size(18px, 1.2);
+    }
+  }
+}
+
+@media screen and (max-width: 319px) {
+  .about-me {
+    &__avatar {
+      width: 272px;
+      height: 332px;
+    }
   }
 }

@@ -20,7 +20,7 @@ const SearchForm = ({ isShortMovie, onShortMovie }) => {
           <input
             type="checkbox"
             checked={isShortMovie}
-            onChange={(isShortMovie) => onShortMovie(isShortMovie)}
+            onChange={() => onShortMovie((isShortMovie) => !isShortMovie)}
           />
           <div className="search__slider"></div>
         </label>

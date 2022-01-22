@@ -51,3 +51,22 @@
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .nav {
+    &__list {
+      flex-wrap: wrap;
+      row-gap: 10px;
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .nav {
+    &__button {
+      width: 82px;
+      height: 26px;
+      @include font-size(10px, 1.33);
+    }
+  }
+}

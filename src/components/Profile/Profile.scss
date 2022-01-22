@@ -29,7 +29,7 @@
   &__title {
     @include font-size(24px, 1.2);
     font-weight: 500;
-    margin-bottom: 123px;
+    margin-bottom: 95px;
   }
   &__input-container {
     padding: 10px 0;
@@ -41,7 +41,7 @@
     justify-content: space-between;
     position: relative;
     &:last-of-type {
-      margin-bottom: 220px;
+      margin-bottom: 200px;
     }
     &:focus-within {
       border-color: $blue;
@@ -84,5 +84,22 @@
   }
   &__logout-button {
     color: $red;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .form {
+    &__title {
+      margin-bottom: 70px;
+    }
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .form {
+    width: calc(100% - 60px);
+    &__title {
+      margin-bottom: 70px;
+    }
   }
 }

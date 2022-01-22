@@ -3,7 +3,7 @@ import "./MoviesCardList.scss";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import PropTypes from "prop-types";
 
-const MoviesCardList = ({ cards }) => {
+const MoviesCardList = ({ movies }) => {
   const [displayedCards, setDisplayedCards] = React.useState(7);
 
   const handleChangeDisplayedCards = () => {
@@ -13,7 +13,7 @@ const MoviesCardList = ({ cards }) => {
   return (
     <section className="movies-card-list">
       <ul className="movies-card-list__list">
-        {cards.slice(0, displayedCards).map((card) => {
+        {movies.slice(0, displayedCards).map((card) => {
           return (
             <MoviesCard
               key={card.id}
@@ -36,7 +36,7 @@ const MoviesCardList = ({ cards }) => {
 };
 
 MoviesCardList.propTypes = {
-  cards: PropTypes.array,
+  movies: PropTypes.array,
 };
 
 export default memo(MoviesCardList);

@@ -1,4 +1,4 @@
-import React, { useEffect, memo } from "react";
+import React, { memo, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 
@@ -12,10 +12,12 @@ const NotFoundPage = ({ onNotFoundPage }) => {
 
   useEffect(() => {
     onNotFoundPage(true);
+
     return () => {
       onNotFoundPage(false);
     };
   });
+
   return (
     <section className="not-found">
       <h3 className="not-found__title">404</h3>

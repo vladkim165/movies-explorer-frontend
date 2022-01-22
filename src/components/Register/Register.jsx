@@ -6,7 +6,7 @@ import logoPath from "../../images/logo.svg";
 import validate from "../../utils/js/validate";
 import useForm from "../../hooks/useForm";
 
-const Register = ({ signupPath }) => {
+const Register = ({ signinPath }) => {
   const handleRegister = () => {
     console.log("Register logic");
   };
@@ -91,7 +91,7 @@ const Register = ({ signupPath }) => {
           <span className="form__redirect-text sign__text">
             Уже зарегистрированы?
           </span>
-          <Link className="form__redirect-link sign__text" to={signupPath}>
+          <Link className="form__redirect-link sign__text" to={signinPath}>
             Войти
           </Link>
         </div>
@@ -101,7 +101,7 @@ const Register = ({ signupPath }) => {
 };
 
 Register.propTypes = {
-  signupPath: PropTypes.string.isRequired,
+  signinPath: PropTypes.string.isRequired,
 };
 
 export default memo(Register);

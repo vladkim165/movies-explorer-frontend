@@ -5,12 +5,12 @@ import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
 import PropTypes from "prop-types";
 
-const SavedMovies = ({ onShortMovie, isShortMovie, savedCards }) => {
+const SavedMovies = ({ onShortMovie, isShortMovie, savedMovies }) => {
   return (
     <>
       <div className="movies">
         <SearchForm onShortMovie={onShortMovie} isShortMovie={isShortMovie} />
-        {savedCards ? <MoviesCardList cards={savedCards} /> : <Preloader />}
+        {savedMovies ? <MoviesCardList movies={savedMovies} /> : <Preloader />}
       </div>
     </>
   );
@@ -19,7 +19,7 @@ const SavedMovies = ({ onShortMovie, isShortMovie, savedCards }) => {
 SavedMovies.propTypes = {
   onShortMovie: PropTypes.func,
   isShortMovie: PropTypes.bool,
-  savedCards: PropTypes.array,
+  savedMovies: PropTypes.array,
 };
 
 export default memo(SavedMovies);

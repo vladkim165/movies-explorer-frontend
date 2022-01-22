@@ -11,7 +11,9 @@ const AboutMe = () => {
       <div className="about-me__content">
         <div className="about-me__description">
           <h2 className="info__title_big about-me__title">Владислав</h2>
-          <h3 className="info__subtitle">Фронтенд-разработчик, 25 лет</h3>
+          <h3 className="info__subtitle about-me__subtitle">
+            Фронтенд-разработчик, 25 лет
+          </h3>
           <p className="info__text about-me__text">
             Я живу в Ростове-на-Дону, закончил факультет экономики РАНХиГС.
             <br></br>

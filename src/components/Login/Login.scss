@@ -45,7 +45,7 @@
     background: $blue;
     height: 45px;
     font-weight: 500;
-    margin: 220px 0 16px 0;
+    margin: 115px 0 16px 0;
     border-radius: 3px;
   }
   &__redirect-container {
@@ -60,5 +60,16 @@
   &__redirect-link {
     color: $blue;
     text-decoration: none;
+  }
+  &__signin-button {
+    margin-top: 190px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .sign {
+    &__form {
+      width: calc(100% - 60px);
+    }
   }
 }

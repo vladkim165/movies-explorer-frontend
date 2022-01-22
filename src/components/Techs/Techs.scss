@@ -23,3 +23,18 @@
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .techs {
+    padding: 90px 50px;
+    &__title {
+      margin: 90px 0 23px 0;
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .techs {
+    padding: 70px 14px;
+  }
+}

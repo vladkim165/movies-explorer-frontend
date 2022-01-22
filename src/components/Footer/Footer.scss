@@ -20,6 +20,13 @@
   &__copyright {
     margin: 0;
   }
+  &__list {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    column-gap: 20px;
+  }
   &__link {
     margin-right: 20px;
     text-decoration: none;
@@ -35,6 +42,31 @@
       display: inline-block;
       opacity: 1;
       transform: translateY(2px);
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .footer {
+    padding: 0 30px 20px 30px;
+  }
+}
+
+@media screen and (max-width: 408px) {
+  .footer {
+    padding: 0 10px 20px 10px;
+    &__refs {
+      flex-direction: column-reverse;
+      align-items: center;
+      row-gap: 30px;
+    }
+    &__list {
+      flex-direction: column;
+      row-gap: 12px;
+      align-items: center;
+    }
+    &__copyright {
+      color: $gray;
     }
   }
 }
