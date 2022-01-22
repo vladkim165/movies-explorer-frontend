@@ -1,18 +1,15 @@
-import React from "react";
+import React, { memo } from "react";
 import "./SavedMovies.scss";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
 import PropTypes from "prop-types";
 
-const SavedMovies = ({ setIsShortMovie, isShortMovie, savedCards }) => {
+const SavedMovies = ({ onShortMovie, isShortMovie, savedCards }) => {
   return (
     <>
       <div className="movies">
-        <SearchForm
-          setIsShortMovie={setIsShortMovie}
-          isShortMovie={isShortMovie}
-        />
+        <SearchForm onShortMovie={onShortMovie} isShortMovie={isShortMovie} />
         {savedCards ? <MoviesCardList cards={savedCards} /> : <Preloader />}
       </div>
     </>
@@ -20,9 +17,9 @@ const SavedMovies = ({ setIsShortMovie, isShortMovie, savedCards }) => {
 };
 
 SavedMovies.propTypes = {
-  setIsShortMovie: PropTypes.func,
+  onShortMovie: PropTypes.func,
   isShortMovie: PropTypes.bool,
   savedCards: PropTypes.array,
 };
 
-export default SavedMovies;
+export default memo(SavedMovies);

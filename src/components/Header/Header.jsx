@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import logoPath from "../../images/logo.svg";
@@ -6,29 +6,31 @@ import "./Header.scss";
 import { useLocation } from "react-router-dom";
 
 const Header = ({
-  signup,
-  signin,
+  signupPath,
+  signinPath,
+  allMoviesPath,
+  savedMoviesPath,
+  profilePath,
   isLoggedIn,
-  allFilmsPath,
-  savedFilmsPath,
-  accountPath,
+  isNotFoundPage,
 }) => {
   const { pathname } = useLocation();
-  if (pathname === "/sign-in" || pathname === "/sign-up") return null;
+  if (pathname === signinPath || pathname === signupPath || isNotFoundPage)
+    return null;
   return (
     <header className="header">
       <img className="header__logo" src={logoPath} alt="Логотип" />
       {isLoggedIn && (
         <div className="header__links-container">
-          <Link className="header__link" to={allFilmsPath}>
+          <Link className="header__link" to={allMoviesPath}>
             Фильмы
           </Link>
-          <Link className="header__link" to={savedFilmsPath}>
+          <Link className="header__link" to={savedMoviesPath}>
             Сохранённые фильмы
           </Link>
           <Link
             className="header__link header__account-button"
-            to={accountPath}
+            to={profilePath}
           >
             Аккаунт
           </Link>
@@ -36,10 +38,16 @@ const Header = ({
       )}
       {!isLoggedIn && (
         <div className="header__button-container">
-          <Link to={signup} className="header__button header__signup-button">
+          <Link
+            to={signupPath}
+            className="header__button header__signup-button"
+          >
             Регистрация
           </Link>
-          <Link to={signin} className="header__button header__signin-button">
+          <Link
+            to={signinPath}
+            className="header__button header__signin-button"
+          >
             Войти
           </Link>
         </div>
@@ -49,12 +57,13 @@ const Header = ({
 };
 
 Header.propTypes = {
-  signup: PropTypes.string.isRequired,
-  signin: PropTypes.string.isRequired,
+  signupPath: PropTypes.string.isRequired,
+  signinPath: PropTypes.string.isRequired,
   isLoggedIn: PropTypes.bool,
-  allFilmsPath: PropTypes.string.isRequired,
-  savedFilmsPath: PropTypes.string.isRequired,
-  accountPath: PropTypes.string.isRequired,
+  allMoviesPath: PropTypes.string.isRequired,
+  savedMoviesPath: PropTypes.string.isRequired,
+  profilePath: PropTypes.string.isRequired,
+  isNotFoundPage: PropTypes.bool,
 };
 
-export default Header;
+export default memo(Header);

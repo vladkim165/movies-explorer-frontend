@@ -1,15 +1,19 @@
-import React from "react";
+import React, { memo } from "react";
+import PropTypes from "prop-types";
 import "./Footer.scss";
 import { useLocation } from "react-router-dom";
 
-const Footer = () => {
+const Footer = ({ signupPath, signinPath, profilePath, isNotFoundPage }) => {
   const { pathname } = useLocation();
   if (
-    pathname === "/profile" ||
-    pathname === "/sign-in" ||
-    pathname === "/sign-up"
-  )
+    pathname === signupPath ||
+    pathname === signinPath ||
+    pathname === profilePath ||
+    isNotFoundPage
+  ) {
     return null;
+  }
+
   return (
     <footer className="footer">
       <div className="footer__description-container">
@@ -35,4 +39,11 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+Footer.propTypes = {
+  signupPath: PropTypes.string.isRequired,
+  signinPath: PropTypes.string.isRequired,
+  profilePath: PropTypes.string.isRequired,
+  isNotFoundPage: PropTypes.bool,
+};
+
+export default memo(Footer);

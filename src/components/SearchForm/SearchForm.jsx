@@ -1,9 +1,9 @@
-import React from "react";
+import React, { memo } from "react";
 import "./SearchForm.scss";
 import searchButtonPath from "../../images/search-button.svg";
 import PropTypes from "prop-types";
 
-const SearchForm = ({ isShortMovie, setIsShortMovie }) => {
+const SearchForm = ({ isShortMovie, onShortMovie }) => {
   return (
     <section className="search">
       <div className="search__bar-container">
@@ -20,7 +20,7 @@ const SearchForm = ({ isShortMovie, setIsShortMovie }) => {
           <input
             type="checkbox"
             checked={isShortMovie}
-            onChange={(isShortMovie) => setIsShortMovie(isShortMovie)}
+            onChange={(isShortMovie) => onShortMovie(isShortMovie)}
           />
           <div className="search__slider"></div>
         </label>
@@ -31,8 +31,8 @@ const SearchForm = ({ isShortMovie, setIsShortMovie }) => {
 };
 
 SearchForm.propTypes = {
-  setIsShortMovie: PropTypes.func,
+  onShortMovie: PropTypes.func,
   isShortMovie: PropTypes.bool,
 };
 
-export default SearchForm;
+export default memo(SearchForm);

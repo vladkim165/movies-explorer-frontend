@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import "./MoviesCardList.scss";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import PropTypes from "prop-types";
@@ -39,4 +39,4 @@ MoviesCardList.propTypes = {
   cards: PropTypes.array,
 };
 
-export default MoviesCardList;
+export default memo(MoviesCardList);
