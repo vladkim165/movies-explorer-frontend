@@ -1,10 +1,11 @@
-import React from "react";
+import React, { memo } from "react";
 import "./AboutMe.scss";
+import PropTypes from "prop-types";
 import avatar from "../../images/avatar.jpg";
 
-const AboutMe = () => {
+const AboutMe = ({ aboutMeRef }) => {
   return (
-    <section className="info about-me">
+    <section className="info about-me" ref={aboutMeRef}>
       <div className="info__title-container">
         <h3 className="info__title">Студент</h3>
       </div>
@@ -28,19 +29,59 @@ const AboutMe = () => {
           </p>
           <ul className="nav__list about-me__list">
             <li className="nav__item about-me__item">
-              <a className="nav__link">Вконтакте</a>
+              <a
+                className="nav__link"
+                href="https://vk.com/vladkim165"
+                target="_blank"
+                rel="noopener noreferrer"
+                alt="Вконтакте"
+              >
+                Вконтакте
+              </a>
             </li>
             <li className="nav__item about-me__item">
-              <a className="nav__link">Github</a>
+              <a
+                className="nav__link"
+                href="https://github.com/vladkim165"
+                target="_blank"
+                rel="noopener noreferrer"
+                alt="Github"
+              >
+                Github
+              </a>
             </li>
             <li className="nav__item about-me__item">
-              <a className="nav__link">Telegram</a>
+              <a
+                className="nav__link"
+                href="https://t.me/vladkim165"
+                target="_blank"
+                rel="noopener noreferrer"
+                alt="Telegram"
+              >
+                Telegram
+              </a>
             </li>
             <li className="nav__item about-me__item">
-              <a className="nav__link">Instagram</a>
+              <a
+                className="nav__link"
+                href="https://www.instagram.com/hatedxx1/"
+                target="_blank"
+                rel="noopener noreferrer"
+                alt="Instagram"
+              >
+                Instagram
+              </a>
             </li>
             <li className="nav__item about-me__item">
-              <a className="nav__link">Twitter</a>
+              <a
+                className="nav__link"
+                href="https://career.habr.com/vladkim165"
+                target="_blank"
+                rel="noopener noreferrer"
+                alt="Хабр Карьера"
+              >
+                Хабр Карьера
+              </a>
             </li>
           </ul>
         </div>
@@ -54,4 +95,11 @@ const AboutMe = () => {
   );
 };
 
-export default AboutMe;
+AboutMe.propTypes = {
+  aboutMeRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+  ]),
+};
+
+export default memo(AboutMe);

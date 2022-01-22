@@ -1,9 +1,10 @@
-import React from "react";
+import React, { memo } from "react";
 import "./AboutProject.scss";
+import PropTypes from "prop-types";
 
-const AboutProject = () => {
+const AboutProject = ({ aboutProjectRef }) => {
   return (
-    <section className="info about-project">
+    <section className="info about-project" ref={aboutProjectRef}>
       <div className="info__title-container">
         <h3 className="info__title">О проекте</h3>
       </div>
@@ -43,4 +44,11 @@ const AboutProject = () => {
   );
 };
 
-export default AboutProject;
+AboutProject.propTypes = {
+  aboutProjectRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+  ]),
+};
+
+export default memo(AboutProject);

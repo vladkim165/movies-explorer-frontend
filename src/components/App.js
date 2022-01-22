@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.scss";
 import Header from "./Header/Header";
@@ -105,9 +105,12 @@ const App = () => {
   const [isShortMovie, setIsShortMovie] = useState(true);
   const [isNotFoundPage, setIsNotFoundPage] = useState(false);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
+  const aboutProjectRef = useRef(null);
+  const techsRef = useRef(null);
+  const aboutMeRef = useRef(null);
 
   useEffect(() => {
-    setIsLoggedIn(true);
+    setIsLoggedIn(false);
   }, []);
 
   useEffect(() => {
@@ -158,7 +161,17 @@ const App = () => {
           path={signupPath}
           element={<Register signinPath={signinPath} />}
         />
-        <Route exact path="/" element={<Main />} />
+        <Route
+          exact
+          path="/"
+          element={
+            <Main
+              aboutProjectRef={aboutProjectRef}
+              techsRef={techsRef}
+              aboutMeRef={aboutMeRef}
+            />
+          }
+        />
         <Route
           path="*"
           element={<NotFoundPage onNotFoundPage={setIsNotFoundPage} />}

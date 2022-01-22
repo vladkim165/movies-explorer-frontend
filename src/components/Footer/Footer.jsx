@@ -25,20 +25,38 @@ const Footer = ({ signupPath, signinPath, profilePath, isNotFoundPage }) => {
         <p className="footer__copyright">&copy; 2021</p>
         <ul className="footer__list">
           <li>
-            <a className="footer__link" href="_blank">
+            <a
+              className="footer__link"
+              href="https://practicum.yandex.ru/"
+              target="_blank"
+              rel="noopener noreferrer"
+              alt="Яндекс.Практикум"
+            >
               Яндекс.Практикум
             </a>
           </li>
 
           <li>
-            <a className="footer__link" href="_blank">
+            <a
+              className="footer__link"
+              href="https://github.com/vladkim165"
+              target="_blank"
+              rel="noopener noreferrer"
+              alt="Github"
+            >
               Github
             </a>
           </li>
 
           <li>
-            <a className="footer__link" href="_blank">
-              Facebook
+            <a
+              className="footer__link"
+              href="https://vk.com/vladkim165"
+              target="_blank"
+              rel="noopener noreferrer"
+              alt="Вконтакте"
+            >
+              Вконтакте
             </a>
           </li>
         </ul>

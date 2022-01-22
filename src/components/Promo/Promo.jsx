@@ -1,9 +1,9 @@
-import React from "react";
-// import PropTypes from "prop-types";
+import React, { memo } from "react";
+import PropTypes from "prop-types";
 import NavTab from "../NavTab/NavTab";
 import "./Promo.scss";
 
-const Promo = () => {
+const Promo = ({ aboutProjectRef, techsRef, aboutMeRef }) => {
   return (
     <section className="info promo">
       <h2 className="info__title_big promo__title">
@@ -11,9 +11,28 @@ const Promo = () => {
         <br></br>
         факультета Веб-разработки.
       </h2>
-      <NavTab />
+      <NavTab
+        aboutProjectRef={aboutProjectRef}
+        techsRef={techsRef}
+        aboutMeRef={aboutMeRef}
+      />
     </section>
   );
 };
 
-export default Promo;
+Promo.propTypes = {
+  aboutProjectRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+  ]),
+  techsRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+  ]),
+  aboutMeRef: PropTypes.oneOfType([
+    PropTypes.func,
+    PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+  ]),
+};
+
+export default memo(Promo);
