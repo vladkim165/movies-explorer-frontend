@@ -7,7 +7,7 @@ const SearchForm = ({ isShortMovie, onShortMovie }) => {
   return (
     <section className="search">
       <div className="search__bar-container">
-        <input className="search__bar" placeholder="Фильм" />
+        <input className="search__bar" placeholder="Фильм" required="true" />
         <button className="search__bar-button">
           <img
             className="search__bar-button-image"

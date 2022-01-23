@@ -117,8 +117,8 @@ const App = () => {
   const aboutMeRef = useRef(null);
 
   useEffect(() => {
-    setIsLoggedIn(true);
-    setIsInfoMessage(true);
+    setIsLoggedIn(false);
+    setIsInfoMessage(false);
     setCurrentInfoMessage({
       success: true,
       message:
@@ -165,6 +165,7 @@ const App = () => {
                   onShortMovie={setIsShortMovie}
                   isShortMovie={isShortMovie}
                   movies={movies}
+                  isSavedMovies={false}
                 />
               }
             />
@@ -175,6 +176,7 @@ const App = () => {
                   onShortMovie={setIsShortMovie}
                   isShortMovie={isShortMovie}
                   savedMovies={savedMovies}
+                  isSavedMovies={true}
                 />
               }
             />

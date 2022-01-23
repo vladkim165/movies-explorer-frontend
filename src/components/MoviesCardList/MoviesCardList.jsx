@@ -3,7 +3,7 @@ import "./MoviesCardList.scss";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import PropTypes from "prop-types";
 
-const MoviesCardList = ({ movies }) => {
+const MoviesCardList = ({ movies, isSavedMovies }) => {
   const [displayedCards, setDisplayedCards] = React.useState(7);
 
   const handleChangeDisplayedCards = () => {
@@ -21,22 +21,26 @@ const MoviesCardList = ({ movies }) => {
               duration={card.duration}
               image={card.image}
               isLiked={card.isLiked}
+              isSavedMovies={isSavedMovies}
             />
           );
         })}
       </ul>
-      <button
-        className="movies-card-list__more-button"
-        onClick={handleChangeDisplayedCards}
-      >
-        Ещё
-      </button>
+      {!isSavedMovies ? (
+        <button
+          className="movies-card-list__more-button"
+          onClick={handleChangeDisplayedCards}
+        >
+          Ещё
+        </button>
+      ) : null}
     </section>
   );
 };
 
 MoviesCardList.propTypes = {
   movies: PropTypes.array,
+  isSavedMovies: PropTypes.bool,
 };
 
 export default memo(MoviesCardList);
