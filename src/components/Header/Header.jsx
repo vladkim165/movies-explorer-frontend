@@ -22,7 +22,9 @@ const Header = ({
 
   return (
     <header className="header">
-      <img className="header__logo" src={logoPath} alt="Логотип" />
+      <Link alt="На главную страницу" to="/">
+        <img className="header__logo" src={logoPath} alt="Логотип" />
+      </Link>
       {isLoggedIn && (
         <div className="header__links-container">
           <Link className="header__link" to={allMoviesPath} alt="Фильмы">

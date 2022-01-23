@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Profile.scss";
 import validate from "../../utils/js/validate";
 import useForm from "../../hooks/useForm";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 
 const Profile = () => {
+  const { name, email } = useContext(CurrentUserContext);
   const handleEdit = () => {
     console.log("Edit Logic");
   };
@@ -16,13 +18,13 @@ const Profile = () => {
     <section className="profile">
       <form className="form" onSubmit={handleSubmit}>
         <h3 className="form__title">
-          Привет,<span> &nbsp;Виталий!</span>
+          Привет,<span> &nbsp;{name}</span>
         </h3>
         <div className="form__input-container">
           <label className="form__input-label form__input-text">Имя</label>
           <input
             className="form__input form__input-text"
-            placeholder="Виталий"
+            placeholder={name}
             name="name"
             autoComplete="new-password"
             onChange={handleChange}
@@ -42,7 +44,7 @@ const Profile = () => {
           <label className="form__input-label form__input-text">E-mail</label>
           <input
             className="form__input form__input-text"
-            placeholder="pochta@gmail.com"
+            placeholder={email}
             name="email"
             autoComplete="new-password"
             onChange={handleChange}
