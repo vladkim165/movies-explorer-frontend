@@ -8,7 +8,7 @@ const InfoMessagePopup = ({ isInfoMessage, onInfoMessage }) => {
   const { success, message } = useContext(CurrentInfoMessageContext);
   const { ref } = useOutsideClick(isInfoMessage, onInfoMessage);
 
-  return isInfoMessage ? (
+  return (
     <div className="message-popup" ref={ref}>
       <button
         className="message-popup__close-button"
@@ -30,7 +30,7 @@ const InfoMessagePopup = ({ isInfoMessage, onInfoMessage }) => {
       </h3>
       <p className="message-popup__message">{message}</p>
     </div>
-  ) : null;
+  );
 };
 
 InfoMessagePopup.propTypes = {

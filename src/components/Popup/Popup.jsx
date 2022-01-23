@@ -6,7 +6,7 @@ const Popup = ({ children, isSideMenuOpen, isInfoMessage }) => {
   const isPopupOpen = isSideMenuOpen || isInfoMessage;
 
   return (
-    <section className={`popup ${isPopupOpen && "popup_active"}`}>
+    <section className={`popup ${isPopupOpen ? "popup_active" : ""}`}>
       {children}
     </section>
   );

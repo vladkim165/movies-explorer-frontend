@@ -7,7 +7,7 @@ import useOutsideClick from "../../hooks/useOutsideClick";
 const Menu = ({ isSideMenuOpen, onSideMenu, profilePath }) => {
   const { ref } = useOutsideClick(isSideMenuOpen, onSideMenu);
   return (
-    <nav className={`menu ${isSideMenuOpen && "menu_active"}`} ref={ref}>
+    <nav className={`menu ${isSideMenuOpen ? "menu_active" : ""}`} ref={ref}>
       <button
         className="menu__button menu__close-button"
         type="button"

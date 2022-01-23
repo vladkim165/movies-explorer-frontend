@@ -18,7 +18,7 @@
   transform: translateX(100%);
   transition: all 0.5s ease;
   &_active {
-    transform: translateX(0%);
+    animation: slide 0.3s linear forwards;
   }
   &__button {
     cursor: pointer;
@@ -91,5 +91,38 @@
     &__list {
       margin-top: 144px;
     }
+  }
+}
+
+@keyframes slide {
+  10% {
+    transform: rotate(90%);
+  }
+  20% {
+    transform: rotate(80%);
+  }
+  30% {
+    transform: rotate(70%);
+  }
+  40% {
+    transform: rotate(60%);
+  }
+  50% {
+    transform: rotate(50%);
+  }
+  60% {
+    transform: rotate(40%);
+  }
+  70% {
+    transform: rotate(30%);
+  }
+  80% {
+    transform: rotate(20%);
+  }
+  90% {
+    transform: rotate(10%);
+  }
+  100% {
+    transform: rotate(0);
   }
 }

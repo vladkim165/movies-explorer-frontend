@@ -117,8 +117,8 @@ const App = () => {
   const aboutMeRef = useRef(null);
 
   useEffect(() => {
-    setIsLoggedIn(false);
-    setIsInfoMessage(false);
+    setIsLoggedIn(true);
+    setIsInfoMessage(true);
     setCurrentInfoMessage({
       success: true,
       message:
@@ -142,15 +142,19 @@ const App = () => {
             onSideMenu={setIsSideMenuOpen}
           />
           <Popup isSideMenuOpen={isSideMenuOpen} isInfoMessage={isInfoMessage}>
-            <Menu
-              isSideMenuOpen={isSideMenuOpen}
-              profilePath={profilePath}
-              onSideMenu={setIsSideMenuOpen}
-            />
-            <InfoMessagePopup
-              isInfoMessage={isInfoMessage}
-              onInfoMessage={setIsInfoMessage}
-            />
+            {isSideMenuOpen ? (
+              <Menu
+                isSideMenuOpen={isSideMenuOpen}
+                profilePath={profilePath}
+                onSideMenu={setIsSideMenuOpen}
+              />
+            ) : null}
+            {isInfoMessage ? (
+              <InfoMessagePopup
+                isInfoMessage={isInfoMessage}
+                onInfoMessage={setIsInfoMessage}
+              />
+            ) : null}
           </Popup>
 
           <Routes>
