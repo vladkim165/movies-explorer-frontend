@@ -40,6 +40,10 @@ const validate = (callback, values) => {
     } else if (!/\S+@\S+\.\S+/.test(values.email)) {
       errors.email = "Неверный формат почты";
     }
+  } else if (name === "handleSearch") {
+    if (!values.film) {
+      errors.film = "Заполните поле";
+    }
   }
   return errors;
 };
