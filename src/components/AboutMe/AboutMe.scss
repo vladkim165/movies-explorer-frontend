@@ -41,6 +41,9 @@
     object-fit: cover;
     border-radius: 13px;
   }
+  &__nav {
+    justify-content: flex-start;
+  }
 }
 
 .nav {
@@ -60,6 +63,14 @@
   }
 }
 
+@media screen and (max-width: 876px) {
+  .about-me {
+    &__item:nth-of-type(n + 3) {
+      display: none;
+    }
+  }
+}
+
 @media screen and (max-width: 768px) {
   .about-me {
     padding: 90px 50px;
@@ -69,19 +80,6 @@
     }
     &__item {
       margin-top: 50px;
-    }
-    &__item:nth-of-type(n + 3) {
-      display: none;
-    }
-  }
-  .info {
-    &__title {
-      &_ {
-        line-height: 1;
-      }
-    }
-    &__text {
-      @include font-size(12px, 1.5);
     }
   }
 }
@@ -130,11 +128,6 @@
     }
     &__list {
       justify-content: flex-start;
-    }
-  }
-  .info {
-    &__title {
-      @include font-size(18px, 1.2);
     }
   }
 }

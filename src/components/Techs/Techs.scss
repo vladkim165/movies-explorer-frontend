@@ -36,5 +36,8 @@
 @media screen and (max-width: 400px) {
   .techs {
     padding: 70px 14px;
+    &__title-container {
+      border-color: $black;
+    }
   }
 }

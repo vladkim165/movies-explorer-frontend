@@ -6,7 +6,7 @@ import "./Promo.scss";
 const Promo = ({ aboutProjectRef, techsRef, aboutMeRef }) => {
   return (
     <section className="info promo">
-      <h2 className="info__title_big promo__title">
+      <h2 className="info__title info__title_big promo__title">
         Учебный проект студента
         <br></br>
         факультета Веб-разработки.

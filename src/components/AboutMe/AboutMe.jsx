@@ -11,7 +11,9 @@ const AboutMe = ({ aboutMeRef }) => {
       </div>
       <div className="about-me__content">
         <div className="about-me__description">
-          <h2 className="info__title_big about-me__title">Владислав</h2>
+          <h2 className="info__title info__title_big about-me__title">
+            Владислав
+          </h2>
           <h3 className="info__subtitle about-me__subtitle">
             Фронтенд-разработчик, 25 лет
           </h3>
@@ -27,63 +29,65 @@ const AboutMe = ({ aboutMeRef }) => {
             веб-разработке. Взамен я предлагаю полную компетентность, быть
             старательным и дружелюбным к вашей команде.
           </p>
-          <ul className="nav__list about-me__list">
-            <li className="nav__item about-me__item">
-              <a
-                className="nav__link"
-                href="https://vk.com/vladkim165"
-                target="_blank"
-                rel="noopener noreferrer"
-                alt="Вконтакте"
-              >
-                Вконтакте
-              </a>
-            </li>
-            <li className="nav__item about-me__item">
-              <a
-                className="nav__link"
-                href="https://github.com/vladkim165"
-                target="_blank"
-                rel="noopener noreferrer"
-                alt="Github"
-              >
-                Github
-              </a>
-            </li>
-            <li className="nav__item about-me__item">
-              <a
-                className="nav__link"
-                href="https://t.me/vladkim165"
-                target="_blank"
-                rel="noopener noreferrer"
-                alt="Telegram"
-              >
-                Telegram
-              </a>
-            </li>
-            <li className="nav__item about-me__item">
-              <a
-                className="nav__link"
-                href="https://www.instagram.com/hatedxx1/"
-                target="_blank"
-                rel="noopener noreferrer"
-                alt="Instagram"
-              >
-                Instagram
-              </a>
-            </li>
-            <li className="nav__item about-me__item">
-              <a
-                className="nav__link"
-                href="https://career.habr.com/vladkim165"
-                target="_blank"
-                rel="noopener noreferrer"
-                alt="Хабр Карьера"
-              >
-                Хабр Карьера
-              </a>
-            </li>
-          </ul>
+          <nav className="nav about-me__nav">
+            <ul className="nav__list about-me__list">
+              <li className="nav__item about-me__item">
+                <a
+                  className="nav__link"
+                  href="https://vk.com/vladkim165"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  alt="Вконтакте"
+                >
+                  Вконтакте
+                </a>
+              </li>
+              <li className="nav__item about-me__item">
+                <a
+                  className="nav__link"
+                  href="https://github.com/vladkim165"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  alt="Github"
+                >
+                  Github
+                </a>
+              </li>
+              <li className="nav__item about-me__item">
+                <a
+                  className="nav__link"
+                  href="https://t.me/vladkim165"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  alt="Telegram"
+                >
+                  Telegram
+                </a>
+              </li>
+              <li className="nav__item about-me__item">
+                <a
+                  className="nav__link"
+                  href="https://www.instagram.com/hatedxx1/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  alt="Instagram"
+                >
+                  Instagram
+                </a>
+              </li>
+              <li className="nav__item about-me__item">
+                <a
+                  className="nav__link"
+                  href="https://career.habr.com/vladkim165"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  alt="Хабр Карьера"
+                >
+                  Хабр Карьера
+                </a>
+              </li>
+            </ul>
+          </nav>
         </div>
         <img
           className="about-me__avatar"

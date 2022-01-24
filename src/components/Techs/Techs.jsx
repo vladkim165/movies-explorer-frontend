@@ -5,11 +5,13 @@ import PropTypes from "prop-types";
 const Techs = ({ techsRef }) => {
   return (
     <section className="techs info" ref={techsRef}>
-      <div className="info__title-container">
+      <div className="info__title-container techs__title-container">
         <h3 className="info__title">Технологии</h3>
       </div>
       <div>
-        <h2 className="info__title_big techs__title">7 технологий</h2>
+        <h2 className="info__title info__title_big techs__title">
+          7 технологий
+        </h2>
         <p className="info__text techs__description">
           На курсе веб-разработки мы освоили технологии, которые применили в
           дипломном проекте.
