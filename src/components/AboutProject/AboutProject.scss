@@ -1,0 +1,110 @@
+@import "../../utils/css/variables.scss";
+
+.bar {
+  display: flex;
+  &__section {
+    height: 36px;
+    align-items: center;
+    &_first {
+      background-color: $green;
+      color: $black;
+      display: flex;
+      justify-content: center;
+    }
+    &_second {
+      background-color: $secondary-light;
+      display: flex;
+      justify-content: center;
+    }
+  }
+  &__sub-text {
+    font-size: 14px;
+    line-height: 1.21;
+    display: flex;
+    justify-content: center;
+    color: $gray;
+    margin: 14px 0 0 0;
+  }
+  &__item-container {
+    &_first {
+      width: 20%;
+    }
+    &_second {
+      width: 80%;
+    }
+  }
+}
+
+.about-project {
+  padding: 110px 70px;
+  &__info {
+    display: flex;
+    padding-top: 70px;
+  }
+  &__info-item {
+    width: 50%;
+    margin-right: 40px;
+    &:last-of-type {
+      margin: 0;
+    }
+  }
+  &__subtitle {
+    margin-bottom: 26px;
+  }
+  &__text {
+    margin-bottom: 110px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .about-project {
+    padding: 90px 50px;
+    &__info-item {
+      margin-right: 30px;
+      &:last-of-type {
+        margin: 0;
+      }
+    }
+    &__subtitle {
+      margin-bottom: 22px;
+    }
+    &__text {
+      margin-bottom: 93px;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .about-project {
+    &__info {
+      flex-direction: column;
+    }
+    &__info-item {
+      margin: 0;
+      width: 100%;
+    }
+    &__subtitle {
+      margin-bottom: 16px;
+      @include font-size(18px, 1.2);
+    }
+    &__text {
+      margin-bottom: 56px;
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .about-project {
+    padding: 70px 14px;
+  }
+  .bar {
+    &__item-container {
+      &_first {
+        width: 35%;
+      }
+      &_second {
+        width: 65%;
+      }
+    }
+  }
+}

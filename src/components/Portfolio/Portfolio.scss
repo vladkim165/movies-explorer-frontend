@@ -1,0 +1,79 @@
+@import "../../utils/css/variables.scss";
+
+.portfolio {
+  padding: 0 70px 125px 70px;
+  &__subtitle {
+    color: $gray;
+    margin-bottom: 50px;
+  }
+  &__list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+  &__item {
+    margin: 0 0 20px 0;
+    width: 100%;
+    border-bottom: 1px solid $dark-gray;
+  }
+  &__link {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    font-size: 30px;
+    line-height: 1.67px;
+    margin-bottom: 20px;
+    &:active {
+      opacity: 1;
+      transform: translateY(2px);
+    }
+  }
+}
+
+.nav {
+  &__link-image {
+    width: 30px;
+    height: 60px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .portfolio {
+    padding: 0 50px 90px 50px;
+    &__subtitle {
+      @include font-size(18px, 1.11);
+    }
+    &__link {
+      @include font-size(28px, 1.78);
+    }
+    &__item {
+      border-color: $light-gray;
+    }
+  }
+  .nav {
+    &__link-image {
+      width: 27px;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .portfolio {
+    &__link {
+      @include font-size(18px, 1.5);
+    }
+  }
+  .nav {
+    &__link-image {
+      width: 18px;
+      height: 28px;
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .portfolio {
+    padding: 0 14px 90px 14px;
+  }
+}

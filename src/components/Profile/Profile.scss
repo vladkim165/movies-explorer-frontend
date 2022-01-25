@@ -1,0 +1,105 @@
+@import "../../utils/css/variables.scss";
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: calc(100vh - 180px);
+  padding-top: 74px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: inherit;
+  width: 410px;
+  &__field-error {
+    @include font-size(12px, 1.2);
+    color: $red;
+    position: absolute;
+    bottom: -24px;
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.3s;
+    &_active {
+      opacity: 1;
+    }
+  }
+  &__title {
+    @include font-size(24px, 1.2);
+    font-weight: 500;
+    margin-bottom: 95px;
+  }
+  &__input-container {
+    padding: 10px 0;
+    margin: 18px 0;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid $dark-gray;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    &:last-of-type {
+      margin-bottom: 200px;
+    }
+    &:focus-within {
+      border-color: $blue;
+    }
+  }
+  &__input {
+    background: none;
+    border: none;
+    color: $white;
+    width: 85%;
+    padding: 0;
+    &:focus {
+      outline: none;
+    }
+    &::placeholder {
+      text-align: right;
+      color: $white;
+    }
+  }
+  &__input-text {
+    @include font-size(11px, 1.18);
+  }
+  &__button {
+    width: 100%;
+    height: 16px;
+    background: none;
+    border: none;
+    color: $white;
+    @include font-size(13px, 1.23);
+    margin-bottom: 16px;
+    transition: all 0.3s ease;
+    &:hover {
+      opacity: 0.5;
+      cursor: pointer;
+    }
+    &:active {
+      opacity: 1;
+      transform: translateY(2px);
+    }
+  }
+  &__logout-button {
+    color: $red;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .form {
+    &__title {
+      margin-bottom: 70px;
+    }
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .form {
+    width: calc(100% - 60px);
+    &__title {
+      margin-bottom: 70px;
+    }
+  }
+}

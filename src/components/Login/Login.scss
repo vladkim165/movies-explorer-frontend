@@ -1,0 +1,76 @@
+@import "../../utils/css/variables.scss";
+
+.sign {
+  display: flex;
+  justify-content: center;
+  padding-top: 70px;
+  &__form {
+    width: 396px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  &__title {
+    margin: 40px 0;
+  }
+  &__logo {
+    margin-bottom: 40px;
+  }
+  &__input-container {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 0;
+    margin: 18px 0;
+  }
+  &__input {
+    width: 100%;
+    &::placeholder {
+      color: $gray;
+      text-align: left;
+    }
+  }
+  &__input-label {
+    @include font-size(10px, 1.2);
+    color: $gray;
+    margin-bottom: 8px;
+  }
+  &__text {
+    @include font-size(14px, 1.2);
+  }
+}
+
+.form {
+  &__submit-button {
+    @include font-size(14px, 1.2);
+    background: $blue;
+    height: 45px;
+    font-weight: 500;
+    margin: 115px 0 16px 0;
+    border-radius: 3px;
+  }
+  &__redirect-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  &__redirect-text {
+    color: $gray;
+    margin-right: 6px;
+  }
+  &__redirect-link {
+    color: $blue;
+    text-decoration: none;
+  }
+  &__signin-button {
+    margin-top: 190px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .sign {
+    &__form {
+      width: calc(100% - 60px);
+      align-items: center;
+    }
+  }
+}

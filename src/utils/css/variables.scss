@@ -1,0 +1,19 @@
+/* colors */
+$primary: #202020;
+$secondary: #272727;
+$secondary-light: #303030;
+$secondary-extra-light: #313131;
+$white: #ffffff;
+$light-gray: #dadada;
+$gray: #8b8b8b;
+$dark-gray: #424242;
+$black: #000000;
+$green: #3ddc84;
+$black: #000000;
+$blue: #4285f4;
+$red: #ee3465;
+
+@mixin font-size($size, $height) {
+  font-size: $size;
+  line-height: $height;
+}

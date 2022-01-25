@@ -1,0 +1,43 @@
+@import "../../utils/css/variables.scss";
+
+.techs {
+  padding: 100px 70px;
+  background-color: $secondary;
+  &__title {
+    margin: 90px 0 26px 0;
+  }
+  &__description {
+    text-align: center;
+    margin-bottom: 100px;
+  }
+}
+
+.nav {
+  &__button {
+    &_big {
+      font-size: 14px;
+      line-height: 1.21;
+      font-weight: 400;
+      width: 90px;
+      height: 60px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .techs {
+    padding: 90px 50px;
+    &__title {
+      margin: 90px 0 23px 0;
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .techs {
+    padding: 70px 14px;
+    &__title-container {
+      border-color: $black;
+    }
+  }
+}

@@ -1,0 +1,107 @@
+@import "../../utils/css/variables.scss";
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 21px 70px;
+  &__logo {
+    width: 38px;
+    height: 38px;
+  }
+  &__button-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  &__button {
+    @include font-size(12px, 1.33);
+    color: $white;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease;
+    &:hover {
+      opacity: 0.5;
+    }
+    &:active {
+      opacity: 1;
+      transform: translateY(2px);
+    }
+  }
+  &__signup-button {
+    margin-right: 30px;
+  }
+  &__signin-button {
+    color: $black;
+    background: $green;
+    border-radius: 3px;
+    width: 76px;
+    height: 32px;
+  }
+  &__links-container {
+    display: flex;
+    align-items: center;
+  }
+  &__link {
+    @include font-size(14px, 1.29);
+    text-decoration: none;
+    color: $white;
+    margin-right: 20px;
+    &:last-of-type {
+      margin-right: 0;
+    }
+    transition: all 0.3s ease;
+    &:hover {
+      opacity: 0.5;
+    }
+    &:active {
+      opacity: 1;
+      transform: translateY(2px);
+    }
+  }
+  &__account-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: $secondary-extra-light;
+    border-radius: 20px;
+    width: 100px;
+    height: 32px;
+    margin-left: 50px;
+  }
+  &__menu-button {
+    width: 44px;
+    height: 44px;
+    background-color: transparent;
+    border: none;
+    background: url(../../images/menu-button.svg);
+    display: none;
+    padding: 0;
+  }
+}
+@media screen and (max-width: 768px) {
+  .header {
+    padding: 20px 30px;
+    &__links-container {
+      align-items: flex-end;
+    }
+    &__link {
+      display: none;
+    }
+    &__menu-button {
+      display: flex;
+    }
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .header {
+    padding: 18px 14px;
+    &__links-container {
+      align-items: flex-end;
+    }
+  }
+}
