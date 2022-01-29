@@ -3,17 +3,28 @@ import PropTypes from "prop-types";
 import "./Register.scss";
 import { Link } from "react-router-dom";
 import logoPath from "../../images/logo.svg";
-import validate from "../../utils/js/validate";
+import validate from "../../utils/js/Validate";
 import useForm from "../../hooks/useForm";
+import { register } from "../../utils/js/MainApi";
 
 const Register = ({ signinPath }) => {
-  const handleRegister = () => {
-    console.log("Register logic");
+  const handleRegister = async () => {
+    try {
+      const { name, email, password } = values;
+      register(name, email, password).then((res) => console.log(res));
+    } catch (err) {
+      console.log(err);
+    }
   };
+
   const { values, handleChange, handleSubmit, errors } = useForm(
     handleRegister,
     validate
   );
+
+  const isButtonDisabled = () => {
+    return errors.email || errors.name || errors.password;
+  };
 
   return (
     <section className="login sign">
@@ -82,8 +93,9 @@ const Register = ({ signinPath }) => {
         </div>
         <button
           className="form__button form__submit-button"
-          id="signin-button"
+          id="signup-button"
           type="submit"
+          disabled={isButtonDisabled()}
         >
           Зарегистрироваться
         </button>

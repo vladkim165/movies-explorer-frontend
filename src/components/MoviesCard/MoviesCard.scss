@@ -19,6 +19,20 @@
     margin: 0 0 13px 0;
     font-weight: 500;
   }
+  &__trailer-link {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+    &:hover {
+      opacity: 0.5;
+    }
+    &:active {
+      color: inherit;
+      opacity: 1;
+      transform: translateY(2px);
+    }
+  }
   &__duration {
     @include font-size(11px, 1.18);
     color: $gray;
@@ -34,6 +48,10 @@
     &:hover {
       opacity: 0.5;
       cursor: pointer;
+    }
+    &:active {
+      opacity: 1;
+      transform: translateY(2px);
     }
   }
   &__like-button {

@@ -1,13 +1,29 @@
-import React, { memo } from "react";
+import React, { memo, useContext } from "react";
 import "./SearchForm.scss";
 import searchButtonPath from "../../images/search-button.svg";
 import PropTypes from "prop-types";
 import useForm from "../../hooks/useForm";
-import validate from "../../utils/js/validate";
+import validate from "../../utils/js/Validate";
+import { getMovies } from "../../utils/js/MoviesApi";
+import CurrentInfoMessageContext from "../../contexts/CurrentInfoMessageContext";
 
-const SearchForm = ({ isShortMovie, onShortMovie }) => {
-  const handleSearch = () => {
-    console.log("Login logic");
+const SearchForm = ({ isShortMovie, onShortMovie, onMovies, onSearch }) => {
+  const setCurrentInfoMessage = useContext(CurrentInfoMessageContext);
+  const isButtonDisabled = () => errors.film;
+  const handleSearch = async () => {
+    try {
+      onSearch(true);
+      const movies = await getMovies();
+      localStorage.setItem("movies", JSON.stringify(movies));
+      onMovies(movies);
+    } catch (err) {
+      onSearch(false);
+      setCurrentInfoMessage({
+        success: false,
+        message:
+          "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз",
+      });
+    }
   };
   const { values, handleChange, handleSubmit, errors } = useForm(
     handleSearch,
@@ -34,7 +50,11 @@ const SearchForm = ({ isShortMovie, onShortMovie }) => {
               {errors.film}
             </span>
           ) : null}
-          <button className="search__bar-button" type="submit">
+          <button
+            className="search__bar-button"
+            type="submit"
+            disabled={isButtonDisabled()}
+          >
             <img
               className="search__bar-button-image"
               src={searchButtonPath}
@@ -60,6 +80,8 @@ const SearchForm = ({ isShortMovie, onShortMovie }) => {
 SearchForm.propTypes = {
   onShortMovie: PropTypes.func,
   isShortMovie: PropTypes.bool,
+  onMovies: PropTypes.func,
+  onSearch: PropTypes.func,
 };
 
 export default memo(SearchForm);

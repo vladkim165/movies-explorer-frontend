@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 
+// listens to clicks outside of the element
 const useOutsideClick = (isOpen, setIsOpen) => {
   const ref = useRef(null);
 

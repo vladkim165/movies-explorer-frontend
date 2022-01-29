@@ -73,6 +73,9 @@
     @include font-size(13px, 1.23);
     margin-bottom: 16px;
     transition: all 0.3s ease;
+    &:disabled {
+      background-color: $dark-gray;
+    }
     &:hover {
       opacity: 0.5;
       cursor: pointer;

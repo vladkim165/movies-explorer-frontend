@@ -3,7 +3,7 @@ import "./Login.scss";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import logoPath from "../../images/logo.svg";
-import validate from "../../utils/js/validate";
+import validate from "../../utils/js/Validate";
 import useForm from "../../hooks/useForm";
 
 const Login = ({ signupPath }) => {

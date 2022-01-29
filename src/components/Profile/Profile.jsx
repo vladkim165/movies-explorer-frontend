@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import "./Profile.scss";
-import validate from "../../utils/js/validate";
+import validate from "../../utils/js/Validate";
 import useForm from "../../hooks/useForm";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 

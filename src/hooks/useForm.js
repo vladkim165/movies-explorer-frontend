@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 
+// form validation, works along with validate(check utils/js)
 const useForm = (callback, validate) => {
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
@@ -7,14 +8,22 @@ const useForm = (callback, validate) => {
 
   const handleSubmit = (event) => {
     if (event) event.preventDefault();
-    setErrors(validate(callback, values));
     setIsSubmitting(true);
   };
+
   useEffect(() => {
+    handleChange(event);
+    setErrors(validate(callback, values));
+  }, []);
+
+  useEffect(() => {
+    setErrors(validate(callback, values));
     if (Object.keys(errors).length === 0 && isSubmitting) {
+      console.log("??");
       callback();
+      setIsSubmitting(false);
     }
-  }, [errors]);
+  }, [values, isSubmitting]);
 
   const handleChange = (event) => {
     setValues((values) => ({
@@ -28,6 +37,7 @@ const useForm = (callback, validate) => {
     handleSubmit,
     values,
     errors,
+    isSubmitting,
   };
 };
 

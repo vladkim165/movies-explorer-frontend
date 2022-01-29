@@ -28,7 +28,7 @@ const SavedMovies = ({
 SavedMovies.propTypes = {
   onShortMovie: PropTypes.func,
   isShortMovie: PropTypes.bool,
-  savedMovies: PropTypes.array,
+  savedMovies: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   isSavedMovies: PropTypes.bool,
 };
 

@@ -1,13 +1,25 @@
-import React, { memo } from "react";
+import React, { memo, useEffect } from "react";
 import "./MoviesCardList.scss";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import PropTypes from "prop-types";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 const MoviesCardList = ({ movies, isSavedMovies }) => {
-  const [displayedCards, setDisplayedCards] = React.useState(7);
+  // listens to the user's vh and vw
+  const { width } = useWindowDimensions();
+  const initialDisplayedCards = () => {
+    return width < 650 ? 5 : 7;
+  };
+  const [displayedCards, setDisplayedCards] = React.useState(0);
+
+  useEffect(() => {
+    setDisplayedCards(initialDisplayedCards());
+  }, []);
 
   const handleChangeDisplayedCards = () => {
-    setDisplayedCards((prevState) => prevState + 7);
+    width < 650
+      ? setDisplayedCards((prevState) => prevState + 5)
+      : setDisplayedCards((prevState) => prevState + 7);
   };
 
   return (
@@ -17,16 +29,16 @@ const MoviesCardList = ({ movies, isSavedMovies }) => {
           return (
             <MoviesCard
               key={card.id}
-              title={card.title}
+              nameRU={card.nameRU}
               duration={card.duration}
               image={card.image}
-              isLiked={card.isLiked}
+              trailerLink={card.trailerLink}
               isSavedMovies={isSavedMovies}
             />
           );
         })}
       </ul>
-      {!isSavedMovies ? (
+      {!isSavedMovies && displayedCards < movies.length ? (
         <button
           className="movies-card-list__more-button"
           onClick={handleChangeDisplayedCards}
@@ -39,7 +51,7 @@ const MoviesCardList = ({ movies, isSavedMovies }) => {
 };
 
 MoviesCardList.propTypes = {
-  movies: PropTypes.array,
+  movies: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   isSavedMovies: PropTypes.bool,
 };
 

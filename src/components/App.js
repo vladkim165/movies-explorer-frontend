@@ -17,65 +17,6 @@ import imagePath from "../images/card.jpg";
 import CurrentInfoMessageContext from "../contexts/CurrentInfoMessageContext";
 import CurrentUserContext from "../contexts/CurrentUserContext";
 
-const movies = [
-  {
-    title: "Киноальманах «100 лет дизайна»",
-    duration: "1ч 42м",
-    image: imagePath,
-    id: 1,
-    isLiked: true,
-  },
-  {
-    title: "Киноальманах «100 лет дизайна»",
-    duration: "1ч 42м",
-    image: imagePath,
-    id: 2,
-    isLiked: true,
-  },
-  {
-    title: "Киноальманах «100 лет дизайна»",
-    duration: "1ч 42м",
-    image: imagePath,
-    id: 3,
-    isLiked: true,
-  },
-  {
-    title: "Киноальманах «100 лет дизайна»",
-    duration: "1ч 42м",
-    image: imagePath,
-    id: 4,
-    isLiked: true,
-  },
-  {
-    title: "Киноальманах «100 лет дизайна»",
-    duration: "1ч 42м",
-    image: imagePath,
-    id: 5,
-    isLiked: true,
-  },
-  {
-    title: "Киноальманах «100 лет дизайна»",
-    duration: "1ч 42м",
-    image: imagePath,
-    id: 6,
-    isLiked: false,
-  },
-  {
-    title: "Киноальманах «100 лет дизайна»",
-    duration: "1ч 42м",
-    image: imagePath,
-    id: 7,
-    isLiked: false,
-  },
-  {
-    title: "Киноальманах «100 лет дизайна»",
-    duration: "1ч 42м",
-    image: imagePath,
-    id: 8,
-    isLiked: false,
-  },
-];
-
 const savedMovies = [
   {
     title: "Киноальманах «100 лет дизайна»",
@@ -107,11 +48,12 @@ const { signupPath, signinPath, allMoviesPath, savedMoviesPath, profilePath } =
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isShortMovie, setIsShortMovie] = useState(true);
+  const [movies, setMovies] = useState(null);
   const [isNotFoundPage, setIsNotFoundPage] = useState(false);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [isInfoMessage, setIsInfoMessage] = useState(false);
-  const [currentInfoMessage, setCurrentInfoMessage] = useState({});
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentInfoMessage, setCurrentInfoMessage] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
   const aboutProjectRef = useRef(null);
   const techsRef = useRef(null);
   const aboutMeRef = useRef(null);
@@ -119,17 +61,21 @@ const App = () => {
   useEffect(() => {
     setIsLoggedIn(false);
     setIsInfoMessage(false);
-    setCurrentInfoMessage({
-      success: true,
-      message:
-        "Нет соединения с интернетомsdfdsfsdfds fsdfssd fdsfdsfdsfd sfsdfdsf dsfdsfdsfds fdsfdsfds fdsfdsfdsfdsfds fdsfdsfsdf dsfsdfdsfsdf",
-    });
     setCurrentUser({ name: "Майкл", email: "vladkim165@gmail.com" });
+
+    const movies = JSON.parse(localStorage.getItem("movies"));
+    setMovies(movies);
   }, []);
+
+  useEffect(() => {
+    if (currentInfoMessage !== null) {
+      setIsInfoMessage(true);
+    }
+  }, [currentInfoMessage]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <CurrentInfoMessageContext.Provider value={currentInfoMessage}>
+      <CurrentInfoMessageContext.Provider value={setCurrentInfoMessage}>
         <div className="page">
           <Header
             signupPath={signupPath}
@@ -153,6 +99,7 @@ const App = () => {
               <InfoMessagePopup
                 isInfoMessage={isInfoMessage}
                 onInfoMessage={setIsInfoMessage}
+                infoMessage={currentInfoMessage}
               />
             ) : null}
           </Popup>
@@ -165,6 +112,7 @@ const App = () => {
                   onShortMovie={setIsShortMovie}
                   isShortMovie={isShortMovie}
                   movies={movies}
+                  onMovies={setMovies}
                   isSavedMovies={false}
                 />
               }
@@ -176,6 +124,7 @@ const App = () => {
                   onShortMovie={setIsShortMovie}
                   isShortMovie={isShortMovie}
                   savedMovies={savedMovies}
+                  onMovies={setMovies}
                   isSavedMovies={true}
                 />
               }
