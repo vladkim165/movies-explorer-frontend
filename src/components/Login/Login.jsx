@@ -1,12 +1,14 @@
-import React, { memo } from "react";
+import React, { memo, useContext } from "react";
 import "./Login.scss";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import logoPath from "../../images/logo.svg";
 import validate from "../../utils/js/Validate";
 import useForm from "../../hooks/useForm";
+import CurrentInfoMessageContext from "../../contexts/CurrentInfoMessageContext";
 
 const Login = ({ signupPath }) => {
+  const setCurrentInfoMessage = useContext(CurrentInfoMessageContext);
   const handleLogin = () => {
     console.log("Login logic");
   };
@@ -14,6 +16,10 @@ const Login = ({ signupPath }) => {
     handleLogin,
     validate
   );
+
+  const isButtonDisabled = () => {
+    return errors.email || errors.password;
+  };
 
   return (
     <section className="login sign">
@@ -64,6 +70,7 @@ const Login = ({ signupPath }) => {
           className="form__button form__submit-button form__signin-button"
           id="signin-button"
           type="submit"
+          disabled={isButtonDisabled()}
         >
           Войти
         </button>

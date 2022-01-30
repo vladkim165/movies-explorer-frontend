@@ -19,7 +19,6 @@ const useForm = (callback, validate) => {
   useEffect(() => {
     setErrors(validate(callback, values));
     if (Object.keys(errors).length === 0 && isSubmitting) {
-      console.log("??");
       callback();
       setIsSubmitting(false);
     }

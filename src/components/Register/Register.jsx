@@ -1,19 +1,27 @@
-import React, { memo } from "react";
+import React, { memo, useContext } from "react";
 import PropTypes from "prop-types";
 import "./Register.scss";
 import { Link } from "react-router-dom";
 import logoPath from "../../images/logo.svg";
 import validate from "../../utils/js/Validate";
 import useForm from "../../hooks/useForm";
-import { register } from "../../utils/js/MainApi";
+import { register, login } from "../../utils/js/MainApi";
+import CurrentInfoMessageContext from "../../contexts/CurrentInfoMessageContext";
 
 const Register = ({ signinPath }) => {
+  const setCurrentInfoMessage = useContext(CurrentInfoMessageContext);
   const handleRegister = async () => {
     try {
       const { name, email, password } = values;
-      register(name, email, password).then((res) => console.log(res));
+      const response = await register(name, email, password);
+      const log = await login(email, password);
+      console.log(log);
     } catch (err) {
-      console.log(err);
+      const res = await err.json();
+      setCurrentInfoMessage({
+        message: res.validation.body.message,
+        success: false,
+      });
     }
   };
 
