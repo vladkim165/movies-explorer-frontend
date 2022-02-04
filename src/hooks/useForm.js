@@ -5,8 +5,8 @@ const useForm = (callback, validate) => {
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-
   const handleSubmit = (event) => {
+    event = event || window.event;
     if (event) event.preventDefault();
     setIsSubmitting(true);
   };
@@ -25,6 +25,7 @@ const useForm = (callback, validate) => {
   }, [values, isSubmitting]);
 
   const handleChange = (event) => {
+    event = event || window.event;
     setValues((values) => ({
       ...values,
       [event.target.name]: event.target.value,

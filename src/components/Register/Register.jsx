@@ -11,18 +11,18 @@ import CurrentInfoMessageContext from "../../contexts/CurrentInfoMessageContext"
 const Register = ({ signinPath }) => {
   const setCurrentInfoMessage = useContext(CurrentInfoMessageContext);
   const handleRegister = async () => {
-    try {
-      const { name, email, password } = values;
-      const response = await register(name, email, password);
-      const log = await login(email, password);
-      console.log(log);
-    } catch (err) {
-      const res = await err.json();
-      setCurrentInfoMessage({
-        message: res.validation.body.message,
-        success: false,
+    const { name, email, password } = values;
+    register(name, email, password)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+        setCurrentInfoMessage({
+          message: err.message,
+          success: false,
+        });
       });
-    }
   };
 
   const { values, handleChange, handleSubmit, errors } = useForm(
