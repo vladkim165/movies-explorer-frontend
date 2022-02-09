@@ -3,35 +3,40 @@ import PropTypes from "prop-types";
 import "./Register.scss";
 import { Link } from "react-router-dom";
 import logoPath from "../../images/logo.svg";
-import validate from "../../utils/js/Validate";
+import validate from "../../utils/js/validate";
 import useForm from "../../hooks/useForm";
-import { register, login } from "../../utils/js/MainApi";
+import { login, register } from "../../utils/js/MainApi";
+import { useNavigate } from "react-router-dom";
 import CurrentInfoMessageContext from "../../contexts/CurrentInfoMessageContext";
 
-const Register = ({ signinPath }) => {
+const Register = ({ signinPath, onLogin, onUser }) => {
   const setCurrentInfoMessage = useContext(CurrentInfoMessageContext);
+  const navigate = useNavigate();
   const handleRegister = async () => {
-    const { name, email, password } = values;
-    register(name, email, password)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-        setCurrentInfoMessage({
-          message: err.message,
-          success: false,
-        });
+    try {
+      const data = await register(values.name, values.email, values.password);
+      const { name, email } = data.message;
+      await login(values.email, values.password);
+      onLogin(true);
+      onUser({ name, email });
+      navigate("/movies", { replace: true });
+    } catch (err) {
+      console.log(err);
+      setCurrentInfoMessage({
+        message: err.message,
+        success: false,
       });
+    }
   };
 
   const { values, handleChange, handleSubmit, errors } = useForm(
     handleRegister,
+    "handleRegister",
     validate
   );
 
   const isButtonDisabled = () => {
-    return errors.email || errors.name || errors.password;
+    return errors.email || errors.name;
   };
 
   return (
@@ -49,15 +54,13 @@ const Register = ({ signinPath }) => {
             onChange={handleChange}
             value={values.name || ""}
           ></input>
-          {errors.name ? (
-            <span
-              className={`form__field-error ${
-                errors.name && "form__field-error_active"
-              }`}
-            >
-              {errors.name}
-            </span>
-          ) : null}
+          <span
+            className={`form__field-error ${
+              errors.name ? "form__field-error_active" : ""
+            }`}
+          >
+            {errors.name}
+          </span>
         </div>
         <div className="form__input-container sign__input-container">
           <label className="form__input-label sign__input-label">E-mail</label>
@@ -69,15 +72,13 @@ const Register = ({ signinPath }) => {
             onChange={handleChange}
             value={values.email || ""}
           ></input>
-          {errors.email ? (
-            <span
-              className={`form__field-error ${
-                errors.email && "form__field-error_active"
-              }`}
-            >
-              {errors.email}
-            </span>
-          ) : null}
+          <span
+            className={`form__field-error ${
+              errors.email ? "form__field-error_active" : ""
+            }`}
+          >
+            {errors.email}
+          </span>
         </div>
         <div className="form__input-container sign__input-container">
           <label className="form__input-label sign__input-label">Пароль</label>
@@ -89,15 +90,13 @@ const Register = ({ signinPath }) => {
             onChange={handleChange}
             value={values.password || ""}
           ></input>
-          {errors.password ? (
-            <span
-              className={`form__field-error ${
-                errors.password && "form__field-error_active"
-              }`}
-            >
-              {errors.password}
-            </span>
-          ) : null}
+          <span
+            className={`form__field-error ${
+              errors.password ? "form__field-error_active" : ""
+            }`}
+          >
+            {errors.password}
+          </span>
         </div>
         <button
           className="form__button form__submit-button"
@@ -122,6 +121,8 @@ const Register = ({ signinPath }) => {
 
 Register.propTypes = {
   signinPath: PropTypes.string.isRequired,
+  onLogin: PropTypes.func.isRequired,
+  onUser: PropTypes.func.isRequired,
 };
 
 export default memo(Register);

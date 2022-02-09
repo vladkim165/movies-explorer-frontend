@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
+
 import "./App.scss";
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
@@ -13,26 +14,10 @@ import NotFoundPage from "./NotFoundPage/NotFoundPage";
 import Menu from "./Menu/Menu";
 import Popup from "./Popup/Popup";
 import InfoMessagePopup from "./InfoMessagePopup/InfoMessagePopup";
-import imagePath from "../images/card.jpg";
 import CurrentInfoMessageContext from "../contexts/CurrentInfoMessageContext";
 import CurrentUserContext from "../contexts/CurrentUserContext";
-
-const savedMovies = [
-  {
-    title: "Киноальманах «100 лет дизайна»",
-    duration: "1ч 42м",
-    image: imagePath,
-    id: 6,
-    isLiked: false,
-  },
-  {
-    title: "Киноальманах «100 лет дизайна»",
-    duration: "1ч 42м",
-    image: imagePath,
-    id: 7,
-    isLiked: false,
-  },
-];
+import { auth, getSavedMovies } from "../utils/js/MainApi";
+import RequireAuth from "./RequireAuth/RequireAuth";
 
 const paths = {
   signupPath: "/signup",
@@ -49,29 +34,53 @@ const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isShortMovie, setIsShortMovie] = useState(true);
   const [movies, setMovies] = useState(null);
+  const [savedMovies, setSavedMovies] = useState([]);
   const [isNotFoundPage, setIsNotFoundPage] = useState(false);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [isInfoMessage, setIsInfoMessage] = useState(false);
-  const [currentInfoMessage, setCurrentInfoMessage] = useState(null);
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentInfoMessage, setCurrentInfoMessage] = useState({
+    message: "",
+    success: false,
+  });
+  const [currentUser, setCurrentUser] = useState({ name: "", email: "" });
   const aboutProjectRef = useRef(null);
   const techsRef = useRef(null);
   const aboutMeRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    setIsLoggedIn(false);
-    setIsInfoMessage(false);
-    setCurrentUser({ name: "Майкл", email: "vladkim165@gmail.com" });
-
-    const movies = JSON.parse(localStorage.getItem("movies"));
-    setMovies(movies);
+    const moviesFromStorage = JSON.parse(localStorage.getItem("movies"));
+    setMovies(moviesFromStorage);
   }, []);
 
+  // Выводит модальное окно, если есть что выводить
   useEffect(() => {
-    if (currentInfoMessage !== null) {
+    if (currentInfoMessage?.message && currentInfoMessage.message !== "") {
       setIsInfoMessage(true);
     }
-  }, [currentInfoMessage]);
+  }, [currentInfoMessage?.message]);
+
+  // checks for cookie jwt and gets saved movies
+  useEffect(async () => {
+    try {
+      const data = await auth();
+      if (data.message !== "Необходима авторизация") {
+        const { name, email } = data;
+        setIsLoggedIn(true);
+        setCurrentUser({ name, email });
+        const savedMovies = await getSavedMovies();
+        setSavedMovies(savedMovies);
+        navigate("movies");
+      }
+    } catch (err) {
+      console.log(err);
+      setCurrentInfoMessage({
+        message:
+          "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз",
+        success: false,
+      });
+    }
+  }, []);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -108,35 +117,62 @@ const App = () => {
             <Route
               path="/movies"
               element={
-                <Movies
-                  onShortMovie={setIsShortMovie}
-                  isShortMovie={isShortMovie}
-                  movies={movies}
-                  onMovies={setMovies}
-                  isSavedMovies={false}
-                />
+                <RequireAuth isLoggedIn={isLoggedIn}>
+                  <Movies
+                    onShortMovie={setIsShortMovie}
+                    isShortMovie={isShortMovie}
+                    movies={movies}
+                    onMovies={setMovies}
+                    isSavedMovies={false}
+                    savedMovies={savedMovies}
+                    onSavedMovies={setSavedMovies}
+                  />
+                </RequireAuth>
               }
             />
+
             <Route
               path="/saved-movies"
               element={
-                <SavedMovies
-                  onShortMovie={setIsShortMovie}
-                  isShortMovie={isShortMovie}
-                  savedMovies={savedMovies}
-                  onMovies={setMovies}
-                  isSavedMovies={true}
+                <RequireAuth isLoggedIn={isLoggedIn}>
+                  <SavedMovies
+                    onShortMovie={setIsShortMovie}
+                    isShortMovie={isShortMovie}
+                    savedMovies={savedMovies}
+                    onSavedMovies={setSavedMovies}
+                    onMovies={setMovies}
+                    isSavedMovies={true}
+                  />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/profile"
+              element={
+                <RequireAuth isLoggedIn={isLoggedIn}>
+                  <Profile onLogin={setIsLoggedIn} onUser={setCurrentUser} />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path={signinPath}
+              element={
+                <Login
+                  signupPath={signupPath}
+                  onLogin={setIsLoggedIn}
+                  onUser={setCurrentUser}
                 />
               }
             />
-            <Route path="/profile" element={<Profile />} />
-            <Route
-              path={signinPath}
-              element={<Login signupPath={signupPath} />}
-            />
             <Route
               path={signupPath}
-              element={<Register signinPath={signinPath} />}
+              element={
+                <Register
+                  signinPath={signinPath}
+                  onLogin={setIsLoggedIn}
+                  onUser={setCurrentUser}
+                />
+              }
             />
             <Route
               exact

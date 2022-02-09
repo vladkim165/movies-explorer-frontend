@@ -1,21 +1,20 @@
-const ERR_MESSAGES = {
-  email: {
-    format: "Неверный формат почты",
-  },
-  name: {
-    length: "Имя должно содержать от 2 до 15 символов",
-    format: "Только латиница, кириллица, пробел или дефис",
-  },
-  password: {
-    length: "Пароль должен содержать от 5 до 15 символов",
-  },
-};
+const validate = (action, values) => {
+  const ERR_MESSAGES = {
+    email: {
+      format: "Неверный формат почты",
+    },
+    name: {
+      length: "Имя должно содержать от 2 до 15 символов",
+      format: "Только латиница, кириллица, пробел или дефис",
+    },
+    password: {
+      length: "Пароль должен содержать от 5 до 15 символов",
+    },
+  };
 
-const validate = (callback, values) => {
-  const { name } = callback;
   let errors = {};
 
-  if (name === "handleRegister") {
+  if (action === "handleRegister") {
     if (!values.email) {
       errors.email = true;
     } else if (!/\S+@\S+\.\S+/.test(values.email)) {
@@ -33,7 +32,7 @@ const validate = (callback, values) => {
     } else if (values.password.length < 5 || values.password.length > 15) {
       errors.password = ERR_MESSAGES.password.length;
     }
-  } else if (name === "handleLogin") {
+  } else if (action === "handleLogin") {
     if (!values.email) {
       errors.email = true;
     } else if (!/\S+@\S+\.\S+/.test(values.email)) {
@@ -44,7 +43,7 @@ const validate = (callback, values) => {
     } else if (values.password.length < 5 || values.password.length > 15) {
       errors.password = ERR_MESSAGES.password.length;
     }
-  } else if (name === "handleEdit") {
+  } else if (action === "handleEdit") {
     if (!values.name) {
       errors.name = true;
     } else if (values.name.length < 2 || values.name.length > 15) {
@@ -57,7 +56,7 @@ const validate = (callback, values) => {
     } else if (!/\S+@\S+\.\S+/.test(values.email)) {
       errors.email = ERR_MESSAGES.email.format;
     }
-  } else if (name === "handleSearch") {
+  } else if (action === "handleSearch") {
     if (!values.film) {
       errors.film = true;
     }

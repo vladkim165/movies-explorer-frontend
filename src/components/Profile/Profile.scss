@@ -1,13 +1,5 @@
 @import "../../utils/css/variables.scss";
 
-.profile {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-height: calc(100vh - 180px);
-  padding-top: 74px;
-}
-
 .form {
   display: flex;
   flex-direction: column;
@@ -87,6 +79,20 @@
   }
   &__logout-button {
     color: $red;
+  }
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: calc(100vh - 180px);
+  padding-top: 74px;
+  &__button {
+    &:disabled {
+      background-color: transparent;
+      color: $gray;
+    }
   }
 }
 

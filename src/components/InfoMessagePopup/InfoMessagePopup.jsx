@@ -7,7 +7,7 @@ import CurrentInfoMessageContext from "../../contexts/CurrentInfoMessageContext"
 const InfoMessagePopup = ({ isInfoMessage, onInfoMessage, infoMessage }) => {
   const setInfoMessage = useContext(CurrentInfoMessageContext);
   const { ref } = useOutsideClick(isInfoMessage, onInfoMessage);
-  const { message = "", success = "false" } = infoMessage;
+  const { message = "", success = false } = infoMessage;
   const handleClose = () => {
     onInfoMessage(false);
     setInfoMessage(null);

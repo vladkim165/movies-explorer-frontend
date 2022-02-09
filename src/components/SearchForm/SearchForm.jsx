@@ -3,21 +3,41 @@ import "./SearchForm.scss";
 import searchButtonPath from "../../images/search-button.svg";
 import PropTypes from "prop-types";
 import useForm from "../../hooks/useForm";
-import validate from "../../utils/js/Validate";
+import validate from "../../utils/js/validate";
 import { getMovies } from "../../utils/js/MoviesApi";
 import CurrentInfoMessageContext from "../../contexts/CurrentInfoMessageContext";
 
-const SearchForm = ({ isShortMovie, onShortMovie, onMovies, onSearch }) => {
+const SearchForm = ({
+  isShortMovie,
+  onShortMovie,
+  onSearch,
+  isSavedMovies,
+  onMovies,
+  matchedMovies,
+  onMatchedMovies,
+}) => {
   const setCurrentInfoMessage = useContext(CurrentInfoMessageContext);
   const isButtonDisabled = () => errors.film;
+
   const handleSearch = async () => {
     try {
-      onSearch(true);
-      const movies = await getMovies();
-      localStorage.setItem("movies", JSON.stringify(movies));
-      onMovies(movies);
+      if (matchedMovies) {
+        const updatedMatchedMovies = matchedMovies.filter((movie) => {
+          if (movie.nameRU) return movie.nameRU.includes(values.film);
+          if (movie.nameEN) return movie.nameEN.includes(values.film);
+        });
+        onMatchedMovies(updatedMatchedMovies);
+      }
+      // fires only on on initial all movies request
+      else if (!matchedMovies && !isSavedMovies) {
+        onSearch(true);
+        const moviesFromServer = await getMovies();
+        localStorage.setItem("movies", JSON.stringify(moviesFromServer));
+        onMovies(moviesFromServer);
+      }
     } catch (err) {
       onSearch(false);
+      console.log(err);
       setCurrentInfoMessage({
         success: false,
         message:
@@ -27,6 +47,7 @@ const SearchForm = ({ isShortMovie, onShortMovie, onMovies, onSearch }) => {
   };
   const { values, handleChange, handleSubmit, errors } = useForm(
     handleSearch,
+    "handleSearch",
     validate
   );
   return (
@@ -41,15 +62,13 @@ const SearchForm = ({ isShortMovie, onShortMovie, onMovies, onSearch }) => {
             name="film"
             autoComplete="new-password"
           />
-          {errors.film ? (
-            <span
-              className={`form__field-error ${
-                errors.film && "form__field-error_active"
-              }`}
-            >
-              {errors.film}
-            </span>
-          ) : null}
+          <span
+            className={`form__field-error ${
+              errors.film ? "form__field-error_active" : ""
+            }`}
+          >
+            {errors.film}
+          </span>
           <button
             className="search__bar-button"
             type="submit"
@@ -80,8 +99,13 @@ const SearchForm = ({ isShortMovie, onShortMovie, onMovies, onSearch }) => {
 SearchForm.propTypes = {
   onShortMovie: PropTypes.func,
   isShortMovie: PropTypes.bool,
-  onMovies: PropTypes.func,
   onSearch: PropTypes.func,
+  isSavedMovies: PropTypes.bool,
+  movies: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+  savedMovies: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+  matchedMovies: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+  onMatchedMovies: PropTypes.func,
+  onMovies: PropTypes.func,
 };
 
 export default memo(SearchForm);

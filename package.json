@@ -1,4 +1,5 @@
 {
+  "homepage": "https://movies-explorer-prod.nomoredomains.rocks/",
   "name": "movies-explorer-frontend",
   "version": "0.1.0",
   "private": true,

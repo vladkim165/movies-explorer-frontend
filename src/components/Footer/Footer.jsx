@@ -1,7 +1,8 @@
 import React, { memo } from "react";
 import PropTypes from "prop-types";
-import "./Footer.scss";
 import { useLocation } from "react-router-dom";
+
+import "./Footer.scss";
 
 const Footer = ({ signupPath, signinPath, profilePath, isNotFoundPage }) => {
   const { pathname } = useLocation();
