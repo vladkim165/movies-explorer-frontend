@@ -36,13 +36,14 @@ const SearchForm = ({
         onMovies(moviesFromServer);
       }
     } catch (err) {
-      onSearch(false);
       console.log(err);
       setCurrentInfoMessage({
         success: false,
         message:
           "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз",
       });
+    } finally {
+      onSearch(false);
     }
   };
   const { values, handleChange, handleSubmit, errors } = useForm(
@@ -101,8 +102,6 @@ SearchForm.propTypes = {
   isShortMovie: PropTypes.bool,
   onSearch: PropTypes.func,
   isSavedMovies: PropTypes.bool,
-  movies: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
-  savedMovies: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   matchedMovies: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   onMatchedMovies: PropTypes.func,
   onMovies: PropTypes.func,

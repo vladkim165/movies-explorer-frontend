@@ -15,7 +15,7 @@ const Login = ({ signupPath, onLogin, onUser }) => {
   const handleLogin = async () => {
     try {
       const data = await login(values.email, values.password);
-      const { name, email } = data;
+      const { name, email } = data.message;
       onLogin(true);
       onUser({ name, email });
       navigate("/movies", { replace: true });
@@ -66,6 +66,7 @@ const Login = ({ signupPath, onLogin, onUser }) => {
             className="form__input sign__input sign__text"
             placeholder="Введите пароль"
             autoComplete="new-password"
+            type="password"
             name="password"
             onChange={handleChange}
             value={values.password || ""}

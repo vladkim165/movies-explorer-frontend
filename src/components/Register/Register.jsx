@@ -86,6 +86,7 @@ const Register = ({ signinPath, onLogin, onUser }) => {
             className="form__input sign__input sign__text"
             placeholder="Введите пароль"
             autoComplete="new-password"
+            type="password"
             name="password"
             onChange={handleChange}
             value={values.password || ""}

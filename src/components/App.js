@@ -53,7 +53,7 @@ const App = () => {
     setMovies(moviesFromStorage);
   }, []);
 
-  // Выводит модальное окно, если есть что выводить
+  // checks if there's a message and shows info popup
   useEffect(() => {
     if (currentInfoMessage?.message && currentInfoMessage.message !== "") {
       setIsInfoMessage(true);

@@ -97,7 +97,7 @@ const MoviesCard = ({
       </div>
       <img
         className="movies-card__image"
-        src={`${BASE_URL}${image.url}`}
+        src={`${BASE_URL}${image?.url}`}
         alt={nameRU}
       ></img>
     </div>
