@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 
 import "./App.scss";
 import Header from "./Header/Header";
@@ -31,7 +31,9 @@ const { signupPath, signinPath, allMoviesPath, savedMoviesPath, profilePath } =
   paths;
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    localStorage.getItem("isLoggedIn") || false
+  );
   const [isShortMovie, setIsShortMovie] = useState(true);
   const [movies, setMovies] = useState(null);
   const [savedMovies, setSavedMovies] = useState([]);
@@ -46,11 +48,14 @@ const App = () => {
   const aboutProjectRef = useRef(null);
   const techsRef = useRef(null);
   const aboutMeRef = useRef(null);
-  const navigate = useNavigate();
 
+  // gets states of movies and short movies checkbox
   useEffect(() => {
     const moviesFromStorage = JSON.parse(localStorage.getItem("movies"));
     setMovies(moviesFromStorage);
+    const isShortMoviesStateFromStorage =
+      localStorage.getItem("isShortMovies") == "true";
+    setIsShortMovie(isShortMoviesStateFromStorage);
   }, []);
 
   // checks if there's a message and shows info popup
@@ -60,17 +65,17 @@ const App = () => {
     }
   }, [currentInfoMessage?.message]);
 
-  // checks for cookie jwt and gets saved movies
+  // checks for jwt cookie and gets saved movies
   useEffect(async () => {
     try {
       const data = await auth();
       if (data.message !== "Необходима авторизация") {
         const { name, email } = data;
         setIsLoggedIn(true);
+        localStorage.setItem("isLoggedIn", true);
         setCurrentUser({ name, email });
         const savedMovies = await getSavedMovies();
         setSavedMovies(savedMovies);
-        navigate("movies");
       }
     } catch (err) {
       console.log(err);
@@ -81,6 +86,11 @@ const App = () => {
       });
     }
   }, []);
+
+  // saves short movies state
+  useEffect(() => {
+    localStorage.setItem("isShortMovies", isShortMovie);
+  }, [isShortMovie]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -112,7 +122,6 @@ const App = () => {
               />
             ) : null}
           </Popup>
-
           <Routes>
             <Route
               path="/movies"
@@ -130,7 +139,6 @@ const App = () => {
                 </RequireAuth>
               }
             />
-
             <Route
               path="/saved-movies"
               element={

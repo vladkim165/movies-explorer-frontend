@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 import "./SavedMovies.scss";
@@ -14,7 +14,24 @@ const SavedMovies = ({
   onSavedMovies,
   movies,
 }) => {
-  const [matchedMovies, setMatchedMovies] = useState(savedMovies);
+  const [matchedSavedMovies, setMatchedSavedMovies] = useState(savedMovies);
+
+  useEffect(() => {
+    localStorage.setItem(
+      "matchedByCharsSavedMovies",
+      JSON.stringify(savedMovies)
+    );
+
+    const filteredByDurationSavedMovies = savedMovies.filter((movie) => {
+      if (isShortMovie) {
+        return movie.duration <= 40;
+      } else {
+        return movie.duration > 40;
+      }
+    });
+    setMatchedSavedMovies(filteredByDurationSavedMovies);
+  }, []);
+
   return (
     <>
       <div className="movies">
@@ -23,8 +40,10 @@ const SavedMovies = ({
           isShortMovie={isShortMovie}
           isSavedMovies={isSavedMovies}
           onMovies={onSavedMovies}
-          matchedMovies={matchedMovies}
-          onMatchedMovies={setMatchedMovies}
+          matchedMovies={matchedSavedMovies}
+          onMatchedMovies={setMatchedSavedMovies}
+          movies={movies}
+          savedMovies={savedMovies}
         />
         {savedMovies ? (
           <MoviesCardList
@@ -33,8 +52,8 @@ const SavedMovies = ({
             onSavedMovies={onSavedMovies}
             savedMovies={savedMovies}
             isShortMovie={isShortMovie}
-            matchedMovies={matchedMovies}
-            onMatchedMovies={setMatchedMovies}
+            matchedMovies={matchedSavedMovies}
+            onMatchedMovies={setMatchedSavedMovies}
           />
         ) : (
           <Preloader />
@@ -48,9 +67,9 @@ SavedMovies.propTypes = {
   onShortMovie: PropTypes.func,
   isShortMovie: PropTypes.bool,
   savedMovies: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+  movies: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   isSavedMovies: PropTypes.bool,
   onSavedMovies: PropTypes.func,
-  movies: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
 };
 
 export default memo(SavedMovies);

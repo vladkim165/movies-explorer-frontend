@@ -23,7 +23,6 @@ const Profile = ({ onLogin, onUser }) => {
           success: true,
           message: "Данные успешно изменены",
         });
-        resetInputs();
       } catch (err) {
         console.log(err);
         setCurrentInfoMessage({
@@ -43,6 +42,10 @@ const Profile = ({ onLogin, onUser }) => {
       await unlogin();
       onLogin(false);
       onUser({ name: "", email: "" });
+      localStorage.removeItem("matchedByCharsMovies");
+      localStorage.removeItem("matchedSearchedMovies");
+      localStorage.removeItem("isShortMovies");
+      localStorage.removeItem("isLoggedIn");
       navigate("/", { replace: true });
     } catch (err) {
       console.log(err);
@@ -55,13 +58,15 @@ const Profile = ({ onLogin, onUser }) => {
   const isButtonDisabled = () => {
     return errors.email || errors.password;
   };
-  const { values, handleChange, handleSubmit, errors, resetInputs } = useForm(
-    handleEdit,
-    "handleEdit",
-    validate
-  );
 
   const { name, email } = useContext(CurrentUserContext);
+
+  const { values, handleChange, handleSubmit, errors } = useForm(
+    handleEdit,
+    "handleEdit",
+    validate,
+    { name: name, email: email }
+  );
 
   return (
     <section className="profile">
@@ -72,8 +77,7 @@ const Profile = ({ onLogin, onUser }) => {
         <div className="form__input-container">
           <label className="form__input-label form__input-text">Имя</label>
           <input
-            className="form__input form__input-text"
-            placeholder={name}
+            className="form__input form__input-text profile__input"
             name="name"
             autoComplete="new-password"
             onChange={handleChange}
@@ -90,8 +94,7 @@ const Profile = ({ onLogin, onUser }) => {
         <div className="form__input-container">
           <label className="form__input-label form__input-text">E-mail</label>
           <input
-            className="form__input form__input-text"
-            placeholder={email}
+            className="form__input form__input-text profile__input"
             name="email"
             autoComplete="new-password"
             onChange={handleChange}
@@ -117,6 +120,7 @@ const Profile = ({ onLogin, onUser }) => {
           className="form__button form__logout-button"
           id="logout-button"
           onClick={handleLogout}
+          type="button"
         >
           Выйти из аккаунта
         </button>

@@ -1,9 +1,11 @@
 const validate = (action, values) => {
   const ERR_MESSAGES = {
     email: {
+      empty: "Заполните поле",
       format: "Неверный формат почты",
     },
     name: {
+      empty: "Заполните поле",
       length: "Имя должно содержать от 2 до 15 символов",
       format: "Только латиница, кириллица, пробел или дефис",
     },
@@ -45,20 +47,16 @@ const validate = (action, values) => {
     }
   } else if (action === "handleEdit") {
     if (!values.name) {
-      errors.name = true;
+      errors.name = ERR_MESSAGES.name.empty;
     } else if (values.name.length < 2 || values.name.length > 15) {
       errors.name = ERR_MESSAGES.name.length;
     } else if (!/^[а-яa-zёЁ -]+$/giu.test(values.name)) {
       errors.name = ERR_MESSAGES.name.format;
     }
     if (!values.email) {
-      errors.email = true;
+      errors.email = ERR_MESSAGES.email.empty;
     } else if (!/\S+@\S+\.\S+/.test(values.email)) {
       errors.email = ERR_MESSAGES.email.format;
-    }
-  } else if (action === "handleSearch") {
-    if (!values.film) {
-      errors.film = true;
     }
   }
   return errors;

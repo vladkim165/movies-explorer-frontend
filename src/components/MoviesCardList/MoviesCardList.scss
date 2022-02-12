@@ -5,6 +5,11 @@
   &__list {
     margin: 0;
     padding: 0;
+    list-style: none;
+  }
+  &__info-text {
+    @include font-size(20px, 1.25);
+    text-align: center;
   }
   &__more-button {
     background-color: $secondary-extra-light;

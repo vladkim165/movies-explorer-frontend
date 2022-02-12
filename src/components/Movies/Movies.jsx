@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react";
+import React, { memo, useState, useEffect } from "react";
 import "./Movies.scss";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
@@ -15,7 +15,42 @@ const Movies = ({
   isSavedMovies,
 }) => {
   const [isSearching, setIsSearching] = useState(false);
-  const [matchedMovies, setMatchedMovies] = useState(movies);
+  const [matchedMovies, setMatchedMovies] = useState([]);
+
+  useEffect(() => {
+    setMatchedMovies(movies);
+  }, [movies]);
+
+  useEffect(() => {
+    try {
+      if (matchedMovies && localStorage.getItem("matchedByCharsMovies")) {
+        const appropriateArrayOfMovies = JSON.parse(
+          localStorage.getItem("matchedByCharsMovies")
+        );
+        const updatedMatchedMovies = appropriateArrayOfMovies.filter(
+          (movie) => {
+            return isShortMovie ? movie.duration <= 40 : movie.duration > 40;
+          }
+        );
+        setMatchedMovies(updatedMatchedMovies);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (localStorage.getItem("matchedSearchedMovies")) {
+      try {
+        const savedSearchedMovies = JSON.parse(
+          localStorage.getItem("matchedSearchedMovies")
+        );
+        setMatchedMovies(savedSearchedMovies);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }, []);
 
   return (
     <>
@@ -28,6 +63,8 @@ const Movies = ({
           isSavedMovies={isSavedMovies}
           matchedMovies={matchedMovies}
           onMatchedMovies={setMatchedMovies}
+          movies={movies}
+          savedMovies={savedMovies}
         />
         {Array.isArray(movies) ? (
           <MoviesCardList

@@ -10,7 +10,6 @@ const MoviesCardList = ({
   isSavedMovies,
   onSavedMovies,
   savedMovies,
-  isShortMovie,
   matchedMovies,
   onMatchedMovies,
 }) => {
@@ -36,44 +35,33 @@ const MoviesCardList = ({
       : setDisplayedCards((prevState) => prevState + 7);
   };
 
-  // filters card array depending on short movie state
-  useEffect(() => {
-    try {
-      if (isShortMovie && matchedMovies) {
-        const updatedMatchedMovies = matchedMovies.filter(
-          (movie) => movie.duration <= 40
-        );
-        onMatchedMovies(updatedMatchedMovies);
-      } else {
-        const appropriateArrayOfMovies = isSavedMovies ? savedMovies : movies;
-        onMatchedMovies(appropriateArrayOfMovies);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  }, [isShortMovie, movies, savedMovies]);
-
   return (
     <section className="movies-card-list">
       <ul className="movies-card-list__list">
-        {Array.isArray(matchedMovies) &&
+        {Array.isArray(matchedMovies) && matchedMovies.length !== 0 ? (
           matchedMovies.slice(0, displayedCards).map((card) => {
             return (
               <MoviesCard
                 key={card.id}
-                nameRU={card.nameRU}
-                nameEN={card.nameEN}
-                duration={card.duration}
-                image={card.image}
-                trailerLink={card?.trailerLink || card?.trailer}
+                nameRU={card?.nameRU || "No info"}
+                nameEN={card?.nameEN || "No info"}
+                duration={card?.duration || 0}
+                image={card?.image || null}
+                trailerLink={card?.trailerLink || card?.trailer || "No info"}
                 isSavedMovies={isSavedMovies}
                 onSavedMovies={onSavedMovies}
                 movies={movies}
                 savedMovies={savedMovies}
-                movieId={card?.id || card?.movieId}
+                movieId={card?.id || card?.movieId || 0}
+                country={card?.country || "No info"}
+                matchedMovies={matchedMovies}
+                onMatchedMovies={onMatchedMovies}
               />
             );
-          })}
+          })
+        ) : (
+          <p className="movies-card-list__info-text">Ничего не найдено</p>
+        )}
       </ul>
       {!isSavedMovies && displayedCards < matchedMovies?.length ? (
         <button
@@ -92,7 +80,6 @@ MoviesCardList.propTypes = {
   isSavedMovies: PropTypes.bool,
   onSavedMovies: PropTypes.func,
   savedMovies: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
-  isShortMovie: PropTypes.bool,
   matchedMovies: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   onMatchedMovies: PropTypes.func,
 };

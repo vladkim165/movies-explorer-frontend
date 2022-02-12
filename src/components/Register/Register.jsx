@@ -18,6 +18,7 @@ const Register = ({ signinPath, onLogin, onUser }) => {
       const { name, email } = data.message;
       await login(values.email, values.password);
       onLogin(true);
+      localStorage.setItem("isLoggedIn", true);
       onUser({ name, email });
       navigate("/movies", { replace: true });
     } catch (err) {

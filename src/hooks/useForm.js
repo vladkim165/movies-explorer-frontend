@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 
 // form validation, works along with validate(check utils/js)
-const useForm = (callback, action, validate) => {
+const useForm = (callback, action, validate, initialValue = {}) => {
   const [values, setValues] = useState({});
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -15,6 +15,10 @@ const useForm = (callback, action, validate) => {
   useEffect(() => {
     setErrors(validate(action, values));
   }, []);
+
+  useLayoutEffect(() => {
+    setValues(initialValue);
+  }, [initialValue.name, initialValue.email]);
 
   useEffect(() => {
     setErrors(validate(action, values));
@@ -31,17 +35,12 @@ const useForm = (callback, action, validate) => {
     }));
   };
 
-  const resetInputs = () => {
-    setValues({});
-  };
-
   return {
     handleChange,
     handleSubmit,
     values,
     errors,
     isSubmitting,
-    resetInputs,
   };
 };
 

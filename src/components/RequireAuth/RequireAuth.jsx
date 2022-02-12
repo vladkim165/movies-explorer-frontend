@@ -1,9 +1,9 @@
-import React from "react";
+import React, { memo } from "react";
 import PropTypes from "prop-types";
 import { Navigate } from "react-router-dom";
 
 const RequireAuth = ({ children, isLoggedIn }) => {
-  return isLoggedIn ? children : <Navigate replace to="/signin" />;
+  return isLoggedIn ? children : <Navigate to="/" />;
 };
 
 RequireAuth.propTypes = {
@@ -14,4 +14,4 @@ RequireAuth.propTypes = {
   ]),
 };
 
-export default RequireAuth;
+export default memo(RequireAuth);

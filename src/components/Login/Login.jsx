@@ -17,6 +17,7 @@ const Login = ({ signupPath, onLogin, onUser }) => {
       const data = await login(values.email, values.password);
       const { name, email } = data.message;
       onLogin(true);
+      localStorage.setItem("isLoggedIn", true);
       onUser({ name, email });
       navigate("/movies", { replace: true });
     } catch (err) {

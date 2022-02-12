@@ -9,6 +9,11 @@
   &:last-of-type {
     margin-bottom: 10px;
   }
+  &__redirect-link {
+    color: inherit;
+    text-decoration: none;
+    padding: 0;
+  }
   &__description {
     padding: 22px;
     display: flex;
@@ -20,8 +25,6 @@
     font-weight: 500;
   }
   &__trailer-link {
-    color: inherit;
-    text-decoration: none;
     transition: all 0.3s ease;
     display: inline-block;
     &:hover {
