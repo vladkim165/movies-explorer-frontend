@@ -47,6 +47,7 @@ const Profile = ({ onLogin, onUser }) => {
       localStorage.removeItem("isShortMovies");
       localStorage.removeItem("isLoggedIn");
       localStorage.removeItem("inputValue");
+      localStorage.removeItem("matchedByCharsSavedMovies");
       navigate("/", { replace: true });
     } catch (err) {
       console.log(err);
