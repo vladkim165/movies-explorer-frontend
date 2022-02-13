@@ -172,6 +172,7 @@ const App = () => {
                     signupPath={signupPath}
                     onLogin={setIsLoggedIn}
                     onUser={setCurrentUser}
+                    onSavedMovies={setSavedMovies}
                   />
                 )
               }
@@ -186,6 +187,7 @@ const App = () => {
                     signinPath={signinPath}
                     onLogin={setIsLoggedIn}
                     onUser={setCurrentUser}
+                    onSavedMovies={setSavedMovies}
                   />
                 )
               }

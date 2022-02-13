@@ -5,11 +5,11 @@ import { Link } from "react-router-dom";
 import logoPath from "../../images/logo.svg";
 import validate from "../../utils/js/validate";
 import useForm from "../../hooks/useForm";
-import { login } from "../../utils/js/MainApi";
+import { login, getSavedMovies } from "../../utils/js/MainApi";
 import { useNavigate } from "react-router-dom";
 import CurrentInfoMessageContext from "../../contexts/CurrentInfoMessageContext";
 
-const Login = ({ signupPath, onLogin, onUser }) => {
+const Login = ({ signupPath, onLogin, onUser, onSavedMovies }) => {
   const setCurrentInfoMessage = useContext(CurrentInfoMessageContext);
   const navigate = useNavigate();
   const handleLogin = async () => {
@@ -19,6 +19,8 @@ const Login = ({ signupPath, onLogin, onUser }) => {
       onLogin(true);
       localStorage.setItem("isLoggedIn", true);
       onUser({ name, email });
+      const savedMovies = await getSavedMovies();
+      onSavedMovies(savedMovies);
       navigate("/movies", { replace: true });
     } catch (err) {
       console.log(err);
@@ -107,6 +109,7 @@ Login.propTypes = {
   signupPath: PropTypes.string.isRequired,
   onLogin: PropTypes.func.isRequired,
   onUser: PropTypes.func.isRequired,
+  onSavedMovies: PropTypes.func.isRequired,
 };
 
 export default memo(Login);

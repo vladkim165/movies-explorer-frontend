@@ -5,11 +5,11 @@ import { Link } from "react-router-dom";
 import logoPath from "../../images/logo.svg";
 import validate from "../../utils/js/validate";
 import useForm from "../../hooks/useForm";
-import { login, register } from "../../utils/js/MainApi";
+import { login, register, getSavedMovies } from "../../utils/js/MainApi";
 import { useNavigate } from "react-router-dom";
 import CurrentInfoMessageContext from "../../contexts/CurrentInfoMessageContext";
 
-const Register = ({ signinPath, onLogin, onUser }) => {
+const Register = ({ signinPath, onLogin, onUser, onSavedMovies }) => {
   const setCurrentInfoMessage = useContext(CurrentInfoMessageContext);
   const navigate = useNavigate();
   const handleRegister = async () => {
@@ -19,6 +19,8 @@ const Register = ({ signinPath, onLogin, onUser }) => {
       await login(values.email, values.password);
       onLogin(true);
       localStorage.setItem("isLoggedIn", true);
+      const savedMovies = await getSavedMovies();
+      onSavedMovies(savedMovies);
       onUser({ name, email });
       navigate("/movies", { replace: true });
     } catch (err) {
@@ -127,6 +129,7 @@ Register.propTypes = {
   signinPath: PropTypes.string.isRequired,
   onLogin: PropTypes.func.isRequired,
   onUser: PropTypes.func.isRequired,
+  onSavedMovies: PropTypes.func.isRequired,
 };
 
 export default memo(Register);
