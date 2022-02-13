@@ -23,6 +23,12 @@ const SearchForm = ({
 
   const handleSearch = async () => {
     try {
+      if (values.film && !isSavedMovies) {
+        localStorage.setItem("inputValue", values.film);
+      } else if (!values.film && !isSavedMovies) {
+        localStorage.setItem("inputValue", "");
+      }
+
       const appropriateArrayOfMovies = isSavedMovies ? savedMovies : movies;
       // fiters appropriate array using users input
       if (matchedMovies && appropriateArrayOfMovies) {
@@ -83,11 +89,32 @@ const SearchForm = ({
 
         localStorage.setItem("movies", JSON.stringify(moviesFromServer));
 
+        const filteredBySearchInput = moviesFromServer.filter((movie) => {
+          if (movie.nameRU && values.film) {
+            return movie.nameRU
+              .toLowerCase()
+              .includes(values.film.toLowerCase());
+          }
+          if (movie.nameEN && values.film) {
+            return movie.nameEN
+              .toLowerCase()
+              .includes(values.film.toLowerCase());
+          }
+          return true;
+        });
+
+        const filteredByInputAndDuration = filteredBySearchInput.filter(
+          (movie) => {
+            return isShortMovie ? movie.duration <= 40 : movie.duration > 40;
+          }
+        );
+
         localStorage.setItem(
           "matchedByCharsMovies",
-          JSON.stringify(moviesFromServer)
+          JSON.stringify(filteredBySearchInput)
         );
-        onMovies(moviesFromServer);
+
+        onMovies(filteredByInputAndDuration);
       }
     } catch (err) {
       console.log(err);
@@ -103,11 +130,7 @@ const SearchForm = ({
       setisButtonDisabled(false);
     }
   };
-  const { values, handleChange, handleSubmit, errors } = useForm(
-    handleSearch,
-    "handleSearch",
-    validate
-  );
+
   const handleSetIsShortMovies = () => {
     onShortMovie((prevState) => !prevState);
   };
@@ -133,6 +156,17 @@ const SearchForm = ({
       console.log(err);
     }
   }, [isShortMovie, movies, savedMovies]);
+
+  const initialValue = isSavedMovies
+    ? {}
+    : { film: localStorage.getItem("inputValue") };
+
+  const { values, handleChange, handleSubmit, errors } = useForm(
+    handleSearch,
+    "handleSearch",
+    validate,
+    initialValue
+  );
 
   return (
     <section className="search">

@@ -22,7 +22,9 @@ const MoviesCard = ({
   onMatchedMovies,
 }) => {
   const setCurrentInfoMessage = useContext(CurrentInfoMessageContext);
-  const isMovieSaved = savedMovies.some((movie) => movie.movieId == movieId);
+  const isMovieSaved = savedMovies
+    ? savedMovies.some((movie) => movie.movieId == movieId)
+    : false;
   const [isButtonDisabled, setIsButtonDisabled] = useState(false);
   const handleDeleteSavedMovie = async () => {
     try {

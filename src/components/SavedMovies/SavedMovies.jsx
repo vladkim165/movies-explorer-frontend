@@ -17,20 +17,22 @@ const SavedMovies = ({
   const [matchedSavedMovies, setMatchedSavedMovies] = useState(savedMovies);
 
   useEffect(() => {
-    localStorage.setItem(
-      "matchedByCharsSavedMovies",
-      JSON.stringify(savedMovies)
-    );
+    if (savedMovies) {
+      localStorage.setItem(
+        "matchedByCharsSavedMovies",
+        JSON.stringify(savedMovies)
+      );
 
-    const filteredByDurationSavedMovies = savedMovies.filter((movie) => {
-      if (isShortMovie) {
-        return movie.duration <= 40;
-      } else {
-        return movie.duration > 40;
-      }
-    });
-    setMatchedSavedMovies(filteredByDurationSavedMovies);
-  }, []);
+      const filteredByDurationSavedMovies = savedMovies.filter((movie) => {
+        if (isShortMovie) {
+          return movie.duration <= 40;
+        } else {
+          return movie.duration > 40;
+        }
+      });
+      setMatchedSavedMovies(filteredByDurationSavedMovies);
+    }
+  }, [savedMovies]);
 
   return (
     <>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 
 import "./App.scss";
 import Header from "./Header/Header";
@@ -36,7 +36,7 @@ const App = () => {
   );
   const [isShortMovie, setIsShortMovie] = useState(true);
   const [movies, setMovies] = useState(null);
-  const [savedMovies, setSavedMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState(null);
   const [isNotFoundPage, setIsNotFoundPage] = useState(false);
   const [isSideMenuOpen, setIsSideMenuOpen] = useState(false);
   const [isInfoMessage, setIsInfoMessage] = useState(false);
@@ -165,25 +165,32 @@ const App = () => {
             <Route
               path={signinPath}
               element={
-                <Login
-                  signupPath={signupPath}
-                  onLogin={setIsLoggedIn}
-                  onUser={setCurrentUser}
-                />
+                isLoggedIn ? (
+                  <Navigate replace to="/movies" />
+                ) : (
+                  <Login
+                    signupPath={signupPath}
+                    onLogin={setIsLoggedIn}
+                    onUser={setCurrentUser}
+                  />
+                )
               }
             />
             <Route
               path={signupPath}
               element={
-                <Register
-                  signinPath={signinPath}
-                  onLogin={setIsLoggedIn}
-                  onUser={setCurrentUser}
-                />
+                isLoggedIn ? (
+                  <Navigate replace to="/movies" />
+                ) : (
+                  <Register
+                    signinPath={signinPath}
+                    onLogin={setIsLoggedIn}
+                    onUser={setCurrentUser}
+                  />
+                )
               }
             />
             <Route
-              exact
               path="/"
               element={
                 <Main

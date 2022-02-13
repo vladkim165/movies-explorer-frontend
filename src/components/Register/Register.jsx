@@ -43,7 +43,9 @@ const Register = ({ signinPath, onLogin, onUser }) => {
   return (
     <section className="login sign">
       <form className="form sign__form" onSubmit={handleSubmit}>
-        <img className="sign__logo" src={logoPath} alt="Логотип"></img>
+        <Link alt="На главную страницу" to="/">
+          <img className="sign__logo" src={logoPath} alt="Логотип"></img>
+        </Link>
         <h3 className="form__title sign__title">Добро пожаловать!</h3>
         <div className="form__input-container sign__input-container">
           <label className="form__input-label sign__input-label">Имя</label>
