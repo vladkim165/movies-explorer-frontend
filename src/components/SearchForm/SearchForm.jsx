@@ -28,10 +28,26 @@ const SearchForm = ({
       } else if (!values.film && !isSavedMovies) {
         localStorage.setItem("inputValue", "");
       }
-
+      const appropriateStorageItemByChars = !isSavedMovies
+        ? "matchedByCharsMovies"
+        : "matchedByCharsSavedMovies";
       const appropriateArrayOfMovies = isSavedMovies ? savedMovies : movies;
       // fiters appropriate array using users input
-      if (matchedMovies && appropriateArrayOfMovies) {
+      const hasInputsValues = Object.keys(values).length;
+
+      if (!hasInputsValues) {
+        const filteredByDurationAllMovies = appropriateArrayOfMovies.filter(
+          (movie) => {
+            return isShortMovie ? movie.duration <= 40 : movie.duration > 40;
+          }
+        );
+
+        localStorage.setItem(
+          appropriateStorageItemByChars,
+          JSON.stringify(filteredByDurationAllMovies)
+        );
+      }
+      if (matchedMovies && appropriateArrayOfMovies && hasInputsValues) {
         const filteredBySearchInput = appropriateArrayOfMovies.filter(
           (movie) => {
             if (movie.nameRU && values.film) {
@@ -48,31 +64,24 @@ const SearchForm = ({
           }
         );
         // need this values be storaged for slider
-        const appropriateStorageItemByChars = !isSavedMovies
-          ? "matchedByCharsMovies"
-          : "matchedByCharsSavedMovies";
         localStorage.setItem(
           appropriateStorageItemByChars,
           JSON.stringify(filteredBySearchInput)
         );
+        const shouldBeShortMovie =
+          localStorage.getItem("isShortMovies") == "true";
         const filteredByInputAndDuration = filteredBySearchInput.filter(
           (movie) => {
-            return isShortMovie ? movie.duration <= 40 : movie.duration > 40;
+            return shouldBeShortMovie
+              ? movie.duration <= 40
+              : movie.duration > 40;
           }
         );
-
-        // if it's movies page save the result of search
-        if (!isSavedMovies) {
-          localStorage.setItem(
-            "matchedSearchedMovies",
-            JSON.stringify(filteredByInputAndDuration)
-          );
-        }
 
         onMatchedMovies(filteredByInputAndDuration);
       }
       // fires only on on initial all movies request, gets initial array of movies and stores it in local storage
-      else if (!appropriateArrayOfMovies && !isSavedMovies) {
+      if (!movies && !isSavedMovies) {
         onSearch(true);
         setisButtonDisabled(true);
         const moviesFromServer = await getMovies();
@@ -138,6 +147,9 @@ const SearchForm = ({
   // listens to the change of short movies slider
   useEffect(() => {
     try {
+      localStorage.setItem("isShortMovies", isShortMovie);
+      const shouldBeShortMovie =
+        localStorage.getItem("isShortMovies") == "true";
       const appropriateStorageItem = !isSavedMovies
         ? "matchedByCharsMovies"
         : "matchedByCharsSavedMovies";
@@ -147,7 +159,9 @@ const SearchForm = ({
         );
         const updatedMatchedMovies = appropriateArrayOfMovies.filter(
           (movie) => {
-            return isShortMovie ? movie.duration <= 40 : movie.duration > 40;
+            return shouldBeShortMovie
+              ? movie.duration <= 40
+              : movie.duration > 40;
           }
         );
         onMatchedMovies(updatedMatchedMovies);

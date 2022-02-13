@@ -58,6 +58,12 @@ const App = () => {
     setIsShortMovie(isShortMoviesStateFromStorage);
   }, []);
 
+  useEffect(() => {
+    if (movies) {
+      localStorage.setItem("matchedByCharsMovies", JSON.stringify(movies));
+    }
+  }, [movies, isLoggedIn]);
+
   // checks if there's a message and shows info popup
   useEffect(() => {
     if (currentInfoMessage?.message && currentInfoMessage.message !== "") {

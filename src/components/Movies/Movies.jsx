@@ -27,9 +27,13 @@ const Movies = ({
         const appropriateArrayOfMovies = JSON.parse(
           localStorage.getItem("matchedByCharsMovies")
         );
+        const shouldBeShortMovie =
+          localStorage.getItem("isShortMovies") == "true";
         const updatedMatchedMovies = appropriateArrayOfMovies.filter(
           (movie) => {
-            return isShortMovie ? movie.duration <= 40 : movie.duration > 40;
+            return shouldBeShortMovie
+              ? movie.duration <= 40
+              : movie.duration > 40;
           }
         );
         setMatchedMovies(updatedMatchedMovies);
@@ -40,12 +44,21 @@ const Movies = ({
   }, []);
 
   useEffect(() => {
-    if (localStorage.getItem("matchedSearchedMovies")) {
+    if (localStorage.getItem("matchedByCharsMovies")) {
       try {
+        const shouldBeShortMovie =
+          localStorage.getItem("isShortMovies") == "true";
         const savedSearchedMovies = JSON.parse(
-          localStorage.getItem("matchedSearchedMovies")
+          localStorage.getItem("matchedByCharsMovies")
         );
-        setMatchedMovies(savedSearchedMovies);
+        const filteredByInputAndDuration = savedSearchedMovies.filter(
+          (movie) => {
+            return shouldBeShortMovie
+              ? movie.duration <= 40
+              : movie.duration > 40;
+          }
+        );
+        setMatchedMovies(filteredByInputAndDuration);
       } catch (err) {
         console.log(err);
       }

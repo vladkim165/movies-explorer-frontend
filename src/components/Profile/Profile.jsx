@@ -43,7 +43,6 @@ const Profile = ({ onLogin, onUser }) => {
       onLogin(false);
       onUser({ name: "", email: "" });
       localStorage.removeItem("matchedByCharsMovies");
-      localStorage.removeItem("matchedSearchedMovies");
       localStorage.removeItem("isShortMovies");
       localStorage.removeItem("isLoggedIn");
       localStorage.removeItem("inputValue");
