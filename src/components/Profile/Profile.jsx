@@ -51,7 +51,7 @@ const Profile = ({ onLogin, onUser }) => {
     } catch (err) {
       console.log(err);
       setCurrentInfoMessage({
-        message: err.message,
+        message: "Что-то пошло не так",
         success: false,
       });
     }

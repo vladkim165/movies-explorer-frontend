@@ -24,10 +24,17 @@ const Login = ({ signupPath, onLogin, onUser, onSavedMovies }) => {
       navigate("/movies", { replace: true });
     } catch (err) {
       console.log(err);
-      setCurrentInfoMessage({
-        message: err.message,
-        success: false,
-      });
+      if (err.status == 401) {
+        setCurrentInfoMessage({
+          message: "Введены неправильный email или пароль",
+          success: false,
+        });
+      } else {
+        setCurrentInfoMessage({
+          message: err.statusText,
+          success: false,
+        });
+      }
     }
   };
   const { values, handleChange, handleSubmit, errors } = useForm(
