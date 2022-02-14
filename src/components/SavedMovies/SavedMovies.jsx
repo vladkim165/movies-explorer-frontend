@@ -1,22 +1,62 @@
-import React, { memo } from "react";
+import React, { memo, useEffect, useState } from "react";
+import PropTypes from "prop-types";
+
 import "./SavedMovies.scss";
 import SearchForm from "../SearchForm/SearchForm";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import Preloader from "../Preloader/Preloader";
-import PropTypes from "prop-types";
 
 const SavedMovies = ({
   onShortMovie,
   isShortMovie,
   savedMovies,
   isSavedMovies,
+  onSavedMovies,
+  movies,
 }) => {
+  const [matchedSavedMovies, setMatchedSavedMovies] = useState(savedMovies);
+
+  useEffect(() => {
+    if (savedMovies) {
+      localStorage.setItem(
+        "matchedByCharsSavedMovies",
+        JSON.stringify(savedMovies)
+      );
+
+      const filteredByDurationSavedMovies = savedMovies.filter((movie) => {
+        if (isShortMovie) {
+          return movie.duration <= 40;
+        } else {
+          return movie.duration > 40;
+        }
+      });
+      setMatchedSavedMovies(filteredByDurationSavedMovies);
+    }
+  }, [savedMovies]);
+
   return (
     <>
       <div className="movies">
-        <SearchForm onShortMovie={onShortMovie} isShortMovie={isShortMovie} />
+        <SearchForm
+          onShortMovie={onShortMovie}
+          isShortMovie={isShortMovie}
+          isSavedMovies={isSavedMovies}
+          onMovies={onSavedMovies}
+          matchedMovies={matchedSavedMovies}
+          onMatchedMovies={setMatchedSavedMovies}
+          movies={movies}
+          savedMovies={savedMovies}
+        />
         {savedMovies ? (
-          <MoviesCardList movies={savedMovies} isSavedMovies={isSavedMovies} />
+          <MoviesCardList
+            movies={movies}
+            isSavedMovies={isSavedMovies}
+            onSavedMovies={onSavedMovies}
+            savedMovies={savedMovies}
+            isShortMovie={isShortMovie}
+            matchedMovies={matchedSavedMovies}
+            onMatchedMovies={setMatchedSavedMovies}
+          />
         ) : (
           <Preloader />
         )}
@@ -28,8 +68,10 @@ const SavedMovies = ({
 SavedMovies.propTypes = {
   onShortMovie: PropTypes.func,
   isShortMovie: PropTypes.bool,
-  savedMovies: PropTypes.array,
+  savedMovies: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+  movies: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   isSavedMovies: PropTypes.bool,
+  onSavedMovies: PropTypes.func,
 };
 
 export default memo(SavedMovies);

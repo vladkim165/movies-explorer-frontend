@@ -1,12 +1,17 @@
 import React, { memo, useContext } from "react";
 import "./InfoMessagePopup.scss";
 import PropTypes from "prop-types";
-import CurrentInfoMessageContext from "../../contexts/CurrentInfoMessageContext";
 import useOutsideClick from "../../hooks/useOutsideClick";
+import CurrentInfoMessageContext from "../../contexts/CurrentInfoMessageContext";
 
-const InfoMessagePopup = ({ isInfoMessage, onInfoMessage }) => {
-  const { success, message } = useContext(CurrentInfoMessageContext);
+const InfoMessagePopup = ({ isInfoMessage, onInfoMessage, infoMessage }) => {
+  const setInfoMessage = useContext(CurrentInfoMessageContext);
   const { ref } = useOutsideClick(isInfoMessage, onInfoMessage);
+  const { message = "", success = false } = infoMessage;
+  const handleClose = () => {
+    onInfoMessage(false);
+    setInfoMessage(null);
+  };
 
   return (
     <div className="message-popup" ref={ref}>
@@ -14,7 +19,7 @@ const InfoMessagePopup = ({ isInfoMessage, onInfoMessage }) => {
         className="message-popup__close-button"
         type="button"
         alt="Закрыть"
-        onClick={() => onInfoMessage(false)}
+        onClick={handleClose}
       ></button>
       <h3
         className={`message-popup__title ${
@@ -36,6 +41,7 @@ const InfoMessagePopup = ({ isInfoMessage, onInfoMessage }) => {
 InfoMessagePopup.propTypes = {
   isInfoMessage: PropTypes.bool.isRequired,
   onInfoMessage: PropTypes.func.isRequired,
+  infoMessage: PropTypes.object,
 };
 
 export default memo(InfoMessagePopup);
